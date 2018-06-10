@@ -1,17 +1,11 @@
-=== Plazart Theme ===
+=== Shop Theme ===
 
-WordPress Theme, Copyright (C) 2016 Templaza
-WordPress Theme is licensed under the GPL.
-
-== Description ==
-
-Welcome to Plazart WordPress Theme.
-
-== Installation ==
-
-You can install the theme through the WordPress installer under Themes - Install themes by searching for it.
-Alternatively, you can download the file, unzip it and move the unzipped contents to the wp-content/themes folder of your WordPress installation. You will then be able to activate the theme.
-
-== Documentation ==
-
-The complete documentation of Interiart is located in "document" folder in this theme main folder. It is also accessable via Theme Options Panel acfter installing and activating this theme.
+Theme Name: Shop Theme
+Theme URI: http://hungkv.com/
+Author: DiepLK
+Author URI: https://www.facebook.com/lathieuhiep
+Version: 1.0.0
+Description: Shop Theme WordPress, Woocommerce
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: one-column, two-columns, three-columns, four-columns, right-sidebar,  theme-options

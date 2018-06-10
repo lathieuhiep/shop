@@ -23,7 +23,7 @@ if( !function_exists('shoptheme_setup') ):
         load_theme_textdomain( 'shoptheme', get_parent_theme_file_path( '/languages' ) );
 
         /**
-         * plazart theme setup.
+         * theme setup.
          *
          * Set up theme defaults and registers support for various WordPress features.
          *

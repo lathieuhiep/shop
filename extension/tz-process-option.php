@@ -29,8 +29,6 @@
         /**
          * Enqueues front-end CSS for the custom css.
          *
-         * @since Plazart Theme 1.1
-         *
          * @see wp_add_inline_style()
          */
 
