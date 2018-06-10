@@ -21,7 +21,7 @@
   ## Single
   ## Pagination
   ## Comment
-## shoptheme Woocommerce
+## Shop Woocommerce
 # Footer
 # Responsive
 * -----------------------------------------------------------------------------
@@ -465,8 +465,11 @@ form.post-password-form p input[type='submit'] {
   display: inline-block;
   padding-left: 7px;
   padding-right: 12px;
-  border-left: 1px solid #eee;
-  font-size: 12px;
+  border-left: 1px solid #eeeeee;
+}
+
+.information span i.fa {
+  margin-right: 5px;
 }
 
 .site-social {
@@ -485,7 +488,11 @@ form.post-password-form p input[type='submit'] {
   text-align: center;
   width: 32px;
   line-height: 32px;
-  border-right: 1px solid #eee;
+  border-right: 1px solid #eeeeee;
+}
+
+.site-social li a:first-child {
+  border-left: 1px solid #eeeeee;
 }
 
 .site-social li a:hover {
@@ -585,19 +592,16 @@ form.post-password-form p input[type='submit'] {
 .site-menu ul li a {
   padding: 0 15px;
   text-shadow: none;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
   display: block;
-}
-
-.site-menu ul li a:last-child {
-  padding-right: 0;
 }
 
 .site-menu ul li a:hover {
   background-color: transparent;
   color: #ff5555;
+}
+
+.site-menu ul li:last-child a {
+  padding-right: 0;
 }
 
 .site-menu ul li .sub-menu {
@@ -669,6 +673,10 @@ form.post-password-form p input[type='submit'] {
 -----------------------------------------------------------------------------*/
 .site-container {
   padding: 50px 0;
+}
+
+.site-container.site-container-elementor {
+  padding: 0;
 }
 
 .site-page-content :after {
@@ -1188,13 +1196,13 @@ aside.widget_rss ul li .rssSummary {
 }
 
 /**
-# shoptheme Woocommerce
+# Shop Woocommerce
 -----------------------------------------------------------------------------*/
-.site-shoptheme {
+.site-shop {
   padding: 50px 0;
 }
 
-.site-shoptheme__result-count-ordering {
+.site-shop__result-count-ordering {
   margin-bottom: 30px;
 }
 
@@ -1298,7 +1306,7 @@ aside.widget_rss ul li .rssSummary {
   border-color: #ff5555;
 }
 
-.woocommerce .site-shoptheme-single .site-shoptheme-single__warp {
+.woocommerce .site-shop-single .site-shop-single__warp {
   margin: 0 -15px 30px;
   display: -webkit-box;
   display: -moz-box;
@@ -1309,19 +1317,19 @@ aside.widget_rss ul li .rssSummary {
   flex-flow: row wrap;
 }
 
-.woocommerce .site-shoptheme-single div.product .site-shoptheme-single__gallery-box {
+.woocommerce .site-shop-single div.product .site-shop-single__gallery-box {
   width: 50%;
   padding: 0 15px;
   position: relative;
 }
 
-.woocommerce .site-shoptheme-single div.product div.images {
+.woocommerce .site-shop-single div.product div.images {
   float: none;
   width: 100%;
   margin: 0;
 }
 
-.woocommerce .site-shoptheme-single div.product div.summary {
+.woocommerce .site-shop-single div.product div.summary {
   float: none;
   width: 50%;
   padding: 0 15px;
