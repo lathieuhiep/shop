@@ -1,0 +1,120 @@
+aside {
+  margin-bottom: 30px;
+
+  .widget-title {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      border-bottom: 1px solid #eee;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      a {
+        display: block;
+
+        &:hover {
+          padding-left: 10px;
+        }
+      }
+      ul {
+        &.children {
+          padding-left: 15px;
+
+          li {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+  select {
+    width: 100%;
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+  &.widget_archive,
+  &.widget_categories {
+    ul {
+      li {
+        a {
+          display: inline-block;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  &.widget_calendar {
+    table {
+      width: 100%;
+
+      caption {
+        padding: 0;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      tr {
+        border-bottom: 1px solid $border-color;
+
+        th {
+          text-align: center;
+        }
+        td {
+          padding: 5px 0;
+          text-align: center;
+
+          &#today {
+            background-color: $background-hover;
+            color: #ffffff;
+
+            a {
+              color: #ffffff;
+            }
+          }
+          &#prev {
+            text-align: left;
+          }
+          &#next {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+  &.widget_rss {
+    ul {
+      li {
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+
+        .rssSummary {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+.search-form {
+  font-size: 12px;
+}
+.search-field {
+  border: 1px solid $border-color;
+  height: auto;
+  padding: 9px 10px;
+  @include border-radius(3px);
+  @include box-shadow(none);
+}
+.search-submit {
+  background-color: $color-hover;
+  color: #fff;
+  padding: 9px 10px;
+  border: none;
+  @include border-radius(3px);
+  @include transition(all 0.4s ease-in-out);
+}

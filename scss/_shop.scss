@@ -1,0 +1,132 @@
+.site-shop {
+  padding: 50px 0;
+}
+.site-shop__result-count-ordering {
+  margin-bottom: 30px;
+}
+.woocommerce {
+  .site-post-item {
+    border-bottom: none;
+  }
+  .woocommerce-result-count {
+    float: none;
+    margin: 0;
+  }
+  .woocommerce-ordering {
+    float: none;
+    margin: 0;
+  }
+  .woocommerce-ordering select {
+    padding: 5px 10px;
+    border: 1px solid $border-color;
+  }
+  ul {
+    &.products {
+      margin: 0 -15px;
+      @include flexbox();
+      @include flex-flow(row wrap);
+
+      li {
+        &.first {
+          clear: none;
+        }
+        &.product {
+          float: none;
+          margin: 0 0 15px;
+          padding: 0 15px;
+          width: 25%;
+
+          .price {
+            del {
+              display: inline-block;
+            }
+            ins {
+              display: inline-block;
+              text-decoration: none;
+            }
+          }
+          .button {
+            padding: 8px 10px;
+            line-height: inherit;
+            border: none;
+            color: #ffffff;
+            font-weight: $font-weight-regular;
+            background-color: $background-primary;
+          }
+        }
+      }
+    }
+  }
+  nav {
+    &.woocommerce-pagination {
+      margin-top: 30px;
+
+      ul {
+        margin: 0;
+        border: none;
+        display: block;
+
+        li {
+          display: inline-block;
+          float: none;
+          border: none;
+
+          span,
+          a {
+            display: block;
+            cursor: pointer;
+            border: 1px solid $border-color;
+            padding: 5px 12px;
+            line-height: inherit;
+            min-width: inherit;
+            @include border-radius(2px);
+          }
+          a {
+            &:focus {
+              background-color: transparent;
+              color: $color-title;
+            }
+          }
+          span.current,
+          a:hover {
+            color: #fff;
+            background: $background-hover;
+            border-color: $background-hover;
+          }
+        }
+      }
+    }
+  }
+  .site-shop-single {
+    .site-shop-single__warp {
+      margin: 0 -15px 30px;
+      @include flexbox();
+      @include flex-flow(row wrap);
+    }
+    div {
+      &.product {
+        .site-shop-single__gallery-box {
+          width: 50%;
+          padding: 0 15px;
+          position: relative;
+        }
+        div {
+          &.images {
+            float: none;
+            width: 100%;
+            margin: 0;
+          }
+          &.summary {
+            float: none;
+            width: 50%;
+            padding: 0 15px;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+.pswp__bg {
+  background-color: rgba(0, 0, 0, 0.9);
+}

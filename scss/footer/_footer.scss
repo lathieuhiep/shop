@@ -1,0 +1,38 @@
+.site-footer {
+  border-top: 2px solid $border-color;
+  padding-bottom: 10px;
+}
+.site-footer__top {
+  padding-top: 50px;
+}
+/* Footer Bottom */
+.site-copyright-menu {
+  border-top: 1px solid $border-color;
+  padding-top: 15px;
+}
+.site-copyright_text {
+  font-size: 12px;
+  margin: 0;
+}
+.site-footer__menu {
+  text-align: right;
+  @include flex(1);
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      padding: 0 5px;
+
+      &:last-child {
+        padding-right: 0;
+      }
+      a {
+        font-size: 12px;
+      }
+    }
+  }
+}
