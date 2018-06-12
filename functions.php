@@ -177,7 +177,7 @@ function shoptheme_register_back_end_scripts(){
 }
 
 //Register Front-End Styles
-add_action('wp_enqueue_scripts', 'shoptheme_register_front_end');
+add_action( 'wp_enqueue_scripts', 'shoptheme_register_front_end' );
 
 function shoptheme_register_front_end() {
 
@@ -197,16 +197,10 @@ function shoptheme_register_front_end() {
     wp_enqueue_style( 'shoptheme-fonts', shoptheme_fonts_url(), array(), null );
     /* End Font */
 
-    /* Start flex slider */
-    if( is_single() || is_tag() || is_category() || is_archive() || is_author() || is_search() || is_home() ){
-
-        /* Start Carousel Css */
-        wp_enqueue_style( 'owl-carousel', get_theme_file_uri( '/css/owl.carousel.min.css' ), array(), '2.2.1' );
-        wp_enqueue_style( 'owl-theme-default', get_theme_file_uri( '/css/owl.theme.default.min.css' ), array(), '2.2.1' );
-        /* End Carousel Css */
-
-    }
-    /* End flex slider */
+    /* Start Carousel Css */
+    wp_enqueue_style( 'owl-carousel', get_theme_file_uri( '/css/owl.carousel.min.css' ), array(), '2.3.4' );
+    wp_enqueue_style( 'owl-theme-default', get_theme_file_uri( '/css/owl.theme.default.min.css' ), array(), '2.3.4' );
+    /* End Carousel Css */
 
     /*  Start Style Css   */
     wp_enqueue_style( 'shoptheme-style', get_stylesheet_uri() );
@@ -228,13 +222,15 @@ function shoptheme_register_front_end() {
 
     wp_enqueue_script( 'bootstrap', get_theme_file_uri( '/js/bootstrap.min.js' ), array('jquery'), '4.0.0', true );
 
-    if( is_single() || is_tag() || is_category() || is_archive() || is_author() || is_search() || is_home()){
+    /* Start Carousel Js */
+    wp_register_script( 'owl-carousel', get_theme_file_uri( '/js/owl.carousel.min.js' ), array(), '2.3.4', true );
 
-        /* Start Carousel Js */
-        wp_enqueue_script( 'owl-carousel', get_theme_file_uri( '/js/owl.carousel.min.js' ), array(), '2.2.1', true );
-        /* End Carousel Js */
+    if( is_single() || is_tag() || is_category() || is_archive() || is_author() || is_search() || is_home() ) :
 
-    }
+        wp_enqueue_script( 'owl-carousel' );
+
+    endif;
+    /* End Carousel Js */
 
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
