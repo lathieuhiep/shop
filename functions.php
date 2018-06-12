@@ -303,14 +303,17 @@ function shoptheme_comments( $shoptheme_comment, $shoptheme_comment_args, $shopt
     <?php endif; ?>
 
     <div class="comment-author vcard">
+
         <?php if ( $shoptheme_comment_args['avatar_size'] != 0 ) echo get_avatar( $shoptheme_comment, $shoptheme_comment_args['avatar_size'] ); ?>
 
     </div>
 
     <?php if ( $shoptheme_comment->comment_approved == '0' ) : ?>
+
         <em class="comment-awaiting-moderation">
             <?php esc_html_e( 'Your comment is awaiting moderation.', 'shoptheme' ); ?>
         </em>
+
     <?php endif; ?>
 
     <div class="comment-meta commentmetadata">
@@ -318,6 +321,7 @@ function shoptheme_comments( $shoptheme_comment, $shoptheme_comment_args, $shopt
              <span class="name">
                 <?php comment_author_link(); ?>
             </span>
+
             <span class="comment-metadata">
                 <?php comment_date(); ?>
             </span>
@@ -327,6 +331,7 @@ function shoptheme_comments( $shoptheme_comment, $shoptheme_comment_args, $shopt
             <?php comment_reply_link( array_merge( $shoptheme_comment_args, array( 'add_below' => $shoptheme_comment_add_below, 'depth' => $shoptheme_comment_depth, 'max_depth' => $shoptheme_comment_args['max_depth'] ) ) ); ?>
 
         </div>
+
         <div class="comment-text-box">
             <?php comment_text(); ?>
         </div>
