@@ -115,55 +115,49 @@ add_action( 'widgets_init', 'shoptheme_widgets_init');
 
 function shoptheme_widgets_init() {
 
-    register_sidebar( array(
-        'name'          => esc_html__( 'Sidebar', 'shoptheme'),
-        'id'            => 'shoptheme-sidebar',
-        'description'   => esc_html__( 'Display sidebar right or left on all page.', 'shoptheme' ),
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-        'before_title'  => '<h2 class="widget-title">',
-        'after_title'   => '</h2>'
-    ));
+    $shoptheme_widgets_arr  =   array(
 
-    register_sidebar( array(
-        'name'          => esc_html__( 'Footer 1', 'shoptheme' ),
-        'id'            => 'shoptheme-footer-1',
-        'description'   => esc_html__( 'Display footer column 1 on all page.', 'shoptheme' ),
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-        'before_title'  => '<h2 class="widget-title">',
-        'after_title'   => '</h2>'
-    ) );
+        'shoptheme-sidebar'     =>  array(
+            'name'              =>  esc_html__( 'Sidebar', 'shoptheme' ),
+            'description'       =>  esc_html__( 'Display sidebar right or left on all page.', 'shoptheme' )
+        ),
 
-    register_sidebar( array(
-        'name'          => esc_html__( 'Footer 2', 'shoptheme' ),
-        'id'            => 'shoptheme-footer-2',
-        'description'   => esc_html__( 'Display footer column 2 on all page.', 'shoptheme' ),
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-        'before_title'  => '<h2 class="widget-title">',
-        'after_title'   => '</h2>'
-    ) );
+        'shoptheme-footer-1'    =>  array(
+            'name'              =>  esc_html__( 'Footer 1', 'shoptheme' ),
+            'description'       =>  esc_html__('Display footer column 1 on all page.', 'shoptheme' )
+        ),
 
-    register_sidebar( array(
-        'name'          => esc_html__( 'Footer 3', 'shoptheme' ),
-        'id'            => 'shoptheme-footer-3',
-        'description'   => esc_html__( 'Display footer column 3 on all page.', 'shoptheme' ),
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-        'before_title'  => '<h2 class="widget-title">',
-        'after_title'   => '</h2>'
-    ) );
+        'shoptheme-footer-2'    =>  array(
+            'name'              =>  esc_html__( 'Footer 2', 'shoptheme' ),
+            'description'       =>  esc_html__('Display footer column 2 on all page.', 'shoptheme' )
+        ),
 
-    register_sidebar( array(
-        'name'          => esc_html__( 'Footer 4', 'shoptheme' ),
-        'id'            => 'shoptheme-footer-4',
-        'description'   => esc_html__( 'Display footer column 4 on all page.', 'shoptheme' ),
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-        'before_title'  => '<h2 class="widget-title">',
-        'after_title'   => '</h2>'
-    ) );
+        'shoptheme-footer-3'    =>  array(
+            'name'              =>  esc_html__( 'Footer 3', 'shoptheme' ),
+            'description'       =>  esc_html__('Display footer column 3 on all page.', 'shoptheme' )
+        ),
+
+        'shoptheme-footer-4'    =>  array(
+            'name'              =>  esc_html__( 'Footer 4', 'shoptheme' ),
+            'description'       =>  esc_html__('Display footer column 4 on all page.', 'shoptheme' )
+        )
+
+    );
+
+    foreach ( $shoptheme_widgets_arr as $shoptheme_widgets_id => $shoptheme_widgets_value ) :
+
+        register_sidebar( array(
+            'name'          =>  esc_attr( $shoptheme_widgets_value['name'] ),
+            'id'            =>  esc_attr( $shoptheme_widgets_id ),
+            'description'   =>  esc_attr( $shoptheme_widgets_value['description'] ),
+            'before_widget' =>  '<aside id="%1$s" class="widget %2$s">',
+            'after_widget'  =>  '</aside>',
+            'before_title'  =>  '<h2 class="widget-title">',
+            'after_title'   =>  '</h2>'
+        ));
+
+    endforeach;
+
 }
 
 //Register Back-End script
