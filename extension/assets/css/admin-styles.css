@@ -311,3 +311,6 @@
 .rwmb-field.rwmb-heading-wrapper p.description {
     margin: 10px 0 0;
 }
+.owl-carousel .owl-stage-outer {
+    height: auto !important;
+}
