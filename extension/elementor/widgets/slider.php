@@ -22,7 +22,7 @@ class shoptheme_widget_slides extends Widget_Base {
     }
 
     public function get_script_depends() {
-        return ['owl-carousel'];
+        return ['owl-carousel', 'shoptheme-elementor-custom'];
     }
 
     protected function _register_controls() {
@@ -40,7 +40,7 @@ class shoptheme_widget_slides extends Widget_Base {
                 'type'      =>  Controls_Manager::REPEATER,
                 'default'   =>  [
                     [
-                        'slides_title'    =>  esc_html__( 'Ready...set...Go!', 'shoptheme' ),
+                        'slides_title'    =>  esc_html__( 'Slider', 'shoptheme' ),
                         'slides_content'  =>  esc_html__( 'I am slide content. Click edit button to change this text', 'shoptheme' ),
                         'slides_button'   =>  esc_html__( 'Click Here', 'shoptheme' ),
                         'slides_link'     =>  '#'
@@ -49,36 +49,20 @@ class shoptheme_widget_slides extends Widget_Base {
 
                 'fields' => [
                     [
+                        'name'          =>  'slides_title',
+                        'label'         =>  esc_html__( 'Title', 'shoptheme' ),
+                        'type'          =>  Controls_Manager::TEXT,
+                        'default'       =>  esc_html__( 'Slider' , 'shoptheme' ),
+                        'label_block'   =>  true,
+                    ],
+
+                    [
                         'name'      =>  'slides_image',
                         'label'     =>  esc_html__( 'Image', 'shoptheme' ),
                         'type'      =>  Controls_Manager::MEDIA,
                         'default'   =>  [
                             'url'   =>  Utils::get_placeholder_image_src(),
                         ],
-                    ],
-
-                    [
-                        'name'          =>  'slides_title',
-                        'label'         =>  esc_html__( 'Title & Description', 'shoptheme' ),
-                        'type'          =>  Controls_Manager::TEXT,
-                        'default'       =>  esc_html__( 'Ready...set...Go!' , 'shoptheme' ),
-                        'label_block'   =>  true,
-                    ],
-
-                    [
-                        'name'          =>  'slides_content',
-                        'label'         =>  esc_html__( 'Content', 'shoptheme' ),
-                        'type'          =>  Controls_Manager::WYSIWYG,
-                        'default'       =>  esc_html__( 'List Content' , 'shoptheme' ),
-                        'show_label'    =>  false,
-                    ],
-
-                    [
-                        'name'          =>  'slides_button',
-                        'label'         =>  esc_html__( 'Button Text', 'shoptheme' ),
-                        'type'          =>  Controls_Manager::TEXT,
-                        'default'       =>  esc_html__( 'Click Here' , 'shoptheme' ),
-                        'label_block'   =>  false,
                     ],
 
                     [
@@ -98,15 +82,55 @@ class shoptheme_widget_slides extends Widget_Base {
         );
 
         $this->end_controls_section();
+
+        $this->start_controls_section(
+            'section_setting_slider',
+            [
+                'label' => esc_html__( 'Setting Slider', 'shoptheme' ),
+                'tab' => Controls_Manager::TAB_SETTINGS
+            ]
+        );
+
+        $this->add_control(
+            'loop',
+            [
+                'type'          =>  Controls_Manager::SWITCHER,
+                'label'         =>  esc_html__('Loop Slider ?', 'shoptheme'),
+                'label_off'     =>  esc_html__('No', 'shoptheme'),
+                'label_on'      =>  esc_html__('Yes', 'shoptheme'),
+                'return_value'  =>  'yes',
+                'default'       =>  'no',
+            ]
+        );
+
+        $this->add_control(
+            'autoplay',
+            [
+                'label'         => esc_html__('Autoplay?', 'shoptheme'),
+                'type'          => Controls_Manager::SWITCHER,
+                'label_off'     => esc_html__('No', 'shoptheme'),
+                'label_on'      => esc_html__('Yes', 'shoptheme'),
+                'return_value'  => 'yes',
+                'default'       => 'no',
+            ]
+        );
+
+        $this->end_controls_section();
+        
     }
 
     protected function render() {
 
         $shoptheme_element_settings  =   $this->get_settings_for_display();
 
+        $shoptheme_slider_settings     =   [
+            'loop'      =>  ( 'yes' === $shoptheme_element_settings['loop'] ),
+            'autoplay'  =>  ( 'yes' === $shoptheme_element_settings['autoplay'] ),
+        ];
+
     ?>
 
-        <div class="element-slides owl-carousel owl-theme">
+        <div class="element-slides owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $shoptheme_slider_settings ) ); ?>'>
 
             <?php
 
@@ -117,21 +141,23 @@ class shoptheme_widget_slides extends Widget_Base {
             ?>
 
                 <div class="element-slides__item">
-                    <?php echo wp_get_attachment_image( $shoptheme_slides_image_item['id'], 'full' ); ?>
 
-                    <div class="element-slides__container d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="element-slides__title">
-                            <?php echo esc_html( $shoptheme_slides_list_item['slides_title'] ); ?>
-                        </h2>
+                    <?php if ( !empty( $shoptheme_slides_btn_item['url'] ) ) : ?>
 
-                        <div class="element-slides__content">
-                            <?php echo wp_kses_post( $shoptheme_slides_list_item['slides_content'] ); ?>
-                        </div>
+                        <a title="<?php echo esc_attr( $shoptheme_slides_list_item['slides_title'] ); ?>" class="element-slides__link" href="<?php echo esc_url( $shoptheme_slides_btn_item['url'] ); ?>" <?php echo ( $shoptheme_slides_btn_item['is_external'] ? 'target="_blank"' : '' ); ?>>
 
-                        <a class="element-slides__link" href="<?php echo esc_url( $shoptheme_slides_btn_item['url'] ); ?>" <?php echo ( $shoptheme_slides_btn_item['is_external'] ? 'target="_blank"' : '' ); ?>>
-                            <?php echo esc_html( $shoptheme_slides_list_item['slides_button'] ); ?>
+                            <?php echo wp_get_attachment_image( $shoptheme_slides_image_item['id'], 'full' ); ?>
+
                         </a>
-                    </div>
+
+                    <?php
+
+                    else:
+                        echo wp_get_attachment_image( $shoptheme_slides_image_item['id'], 'full' );
+                    endif;
+
+                    ?>
+
                 </div>
 
             <?php endforeach; ?>
