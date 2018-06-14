@@ -10,6 +10,7 @@ body {
   overflow-x: hidden;
   font-size: 14px;
   color: $color-primary;
+  background-color: $background-body;
   font-family: $font-family-text;
   font-weight: $font-weight-regular;
   @include flexbox();
@@ -108,9 +109,15 @@ pre {
     background-color: $background-primary;
   }
 }
+
+/* owl carousel navigation */
 .owl-carousel {
   .owl-nav {
+    text-align: center;
+
     button {
+      margin: 0 5px;
+
       &.owl-next,
       &.owl-prev {
         padding: 10px 15px !important;
