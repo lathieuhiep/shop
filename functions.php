@@ -598,3 +598,30 @@ function shoptheme_sanitize_pagination( $shoptheme_content ) {
 
 add_action('navigation_markup_template', 'shoptheme_sanitize_pagination');
 /* End pagination */
+
+/* Start get Category check box */
+function shoptheme_check_get_cat( $shoptheme_check_type_taxonomy ) {
+
+    $shoptheme_cat_check    =   array();
+    $shoptheme_category     =   get_categories( array( 'taxonomy'   =>  $shoptheme_check_type_taxonomy ) );
+
+    if ( isset( $shoptheme_category ) && !empty( $shoptheme_category ) ):
+
+        foreach( $shoptheme_category as $shoptheme_cate ) {
+
+            $shoptheme_cat_check[$shoptheme_cate->term_id]  =   $shoptheme_cate->name;
+
+        }
+
+    endif;
+
+    return $shoptheme_cat_check;
+
+}
+/* End get Category check box */
+
+// function remove editor menu admin
+function shoptheme_remove_editor_menu() {
+    remove_action('admin_menu', '_add_themes_utility_last', 101);
+}
+add_action('_admin_menu', 'shoptheme_remove_editor_menu', 1);
