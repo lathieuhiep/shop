@@ -169,6 +169,68 @@ pre {
   background-color: #333333;
 }
 
+.owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
+  padding: 10px 15px !important;
+  color: #ffffff;
+  background-color: #ff5555;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.owl-carousel .owl-nav button.owl-next i.fa, .owl-carousel .owl-nav button.owl-prev i.fa {
+  font-size: 20px;
+  line-height: inherit;
+}
+
+.owl-carousel .owl-nav button:hover {
+  background-color: #333333;
+}
+
+.owl-carousel .owl-dots {
+  padding: 10px 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.owl-carousel .owl-dots .owl-dot {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.owl-carousel .owl-dots .owl-dot span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #000000;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.owl-carousel .owl-dots .owl-dot.active span, .owl-carousel .owl-dots .owl-dot:hover span {
+  background-color: #ff5555;
+}
+
 /* =WordPress Core
 -------------------------------------------------------------- */
 .alignnone {
@@ -1387,15 +1449,6 @@ aside.widget_rss ul li .rssSummary {
 .element-slides.owl-carousel .owl-nav button {
   position: absolute;
   top: 50%;
-  color: #ffffff;
-  background-color: #333333;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -o-transform: translateY(-50%);

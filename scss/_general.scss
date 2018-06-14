@@ -108,3 +108,51 @@ pre {
     background-color: $background-primary;
   }
 }
+.owl-carousel {
+  .owl-nav {
+    button {
+      &.owl-next,
+      &.owl-prev {
+        padding: 10px 15px !important;
+        color: #ffffff;
+        background-color: #ff5555;
+        @include border-radius(5px);
+        @include transition(all 0.4s ease-in-out);
+
+        i.fa {
+          font-size: 20px;
+          line-height: inherit;
+        }
+      }
+      &:hover {
+        background-color: #333333;
+      }
+    }
+  }
+  .owl-dots {
+    padding: 10px 0;
+    @include flexbox();
+    @include align-items(center);
+    @include justify-content(center);
+
+    .owl-dot {
+      display: inline-block;
+      margin: 0 5px;
+
+      span {
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: #000000;
+        @include border-radius(50%);
+        @include transition(all 0.2s ease-in-out);
+      }
+      &.active,
+      &:hover {
+        span {
+          background-color: #ff5555;
+        }
+      }
+    }
+  }
+}
