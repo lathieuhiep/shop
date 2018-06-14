@@ -99,7 +99,7 @@ class shoptheme_widget_slides extends Widget_Base {
                 'label_off'     =>  esc_html__('No', 'shoptheme'),
                 'label_on'      =>  esc_html__('Yes', 'shoptheme'),
                 'return_value'  =>  'yes',
-                'default'       =>  'no',
+                'default'       =>  'yes',
             ]
         );
 
@@ -110,6 +110,30 @@ class shoptheme_widget_slides extends Widget_Base {
                 'type'          => Controls_Manager::SWITCHER,
                 'label_off'     => esc_html__('No', 'shoptheme'),
                 'label_on'      => esc_html__('Yes', 'shoptheme'),
+                'return_value'  => 'yes',
+                'default'       => 'no',
+            ]
+        );
+
+        $this->add_control(
+            'nav',
+            [
+                'label'         => esc_html__('nav Slider', 'shoptheme'),
+                'type'          => Controls_Manager::SWITCHER,
+                'label_on'      => esc_html__('Yes', 'shoptheme'),
+                'label_off'     => esc_html__('No', 'shoptheme'),
+                'return_value'  => 'yes',
+                'default'       => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'dots',
+            [
+                'label'         => esc_html__('Dots Slider', 'shoptheme'),
+                'type'          => Controls_Manager::SWITCHER,
+                'label_on'      => esc_html__('Yes', 'shoptheme'),
+                'label_off'     => esc_html__('No', 'shoptheme'),
                 'return_value'  => 'yes',
                 'default'       => 'no',
             ]
@@ -126,6 +150,8 @@ class shoptheme_widget_slides extends Widget_Base {
         $shoptheme_slider_settings     =   [
             'loop'      =>  ( 'yes' === $shoptheme_element_settings['loop'] ),
             'autoplay'  =>  ( 'yes' === $shoptheme_element_settings['autoplay'] ),
+            'nav'       =>  ( 'yes' === $shoptheme_element_settings['nav'] ),
+            'dots'      =>  ( 'yes' === $shoptheme_element_settings['dots'] ),
         ];
 
     ?>

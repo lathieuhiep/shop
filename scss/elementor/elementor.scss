@@ -1,0 +1,10 @@
+.elementor-section {
+  &.elementor-section-boxed {
+    > .elementor-container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+}
+
+@import "elementor-slider";

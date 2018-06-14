@@ -52,10 +52,14 @@ body {
   display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
   flex-direction: column;
 }
 
 .sticky-footer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
   flex: 1 0 auto;
 }
 
@@ -476,6 +480,8 @@ form.post-password-form p input[type='submit'] {
   list-style: none;
   margin: 0;
   padding: 0;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
 }
 
@@ -535,10 +541,12 @@ form.post-password-form p input[type='submit'] {
 
 @keyframes toTopFromBottom {
   49% {
+    -webkit-transform: translateY(-100%);
     transform: translateY(-100%);
   }
   50% {
     opacity: 0;
+    -webkit-transform: translateY(100%);
     transform: translateY(100%);
   }
   51% {
@@ -559,6 +567,8 @@ form.post-password-form p input[type='submit'] {
 
 .site-logo {
   -webkit-flex: 0 0 auto;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
 
@@ -574,6 +584,8 @@ form.post-password-form p input[type='submit'] {
 
 .site-menu {
   -webkit-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
   flex: 1;
 }
 
@@ -986,6 +998,7 @@ aside.widget_rss ul li .rssSummary {
   margin-right: 20px;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
+  -webkit-box-flex: 0;
   flex: 0 0 auto;
 }
 
@@ -1075,6 +1088,7 @@ aside.widget_rss ul li .rssSummary {
 .comment-form .comment-notes {
   -moz-box-ordinal-group: 1;
   -ms-flex-order: 1;
+  -webkit-box-ordinal-group: 2;
   order: 1;
 }
 
@@ -1101,6 +1115,7 @@ aside.widget_rss ul li .rssSummary {
 .comment-form .form-submit {
   -moz-box-ordinal-group: 4;
   -ms-flex-order: 4;
+  -webkit-box-ordinal-group: 5;
   order: 4;
 }
 
@@ -1153,6 +1168,7 @@ aside.widget_rss ul li .rssSummary {
 .comments-area .comment-list li .comment-body .comment-author {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
+  -webkit-box-flex: 0;
   flex: 0 0 auto;
 }
 
@@ -1160,6 +1176,7 @@ aside.widget_rss ul li .rssSummary {
   padding-left: 30px;
   -webkit-flex: 1;
   -ms-flex: 1;
+  -webkit-box-flex: 1;
   flex: 1;
 }
 
@@ -1233,6 +1250,9 @@ aside.widget_rss ul li .rssSummary {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-flow: row wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
   flex-flow: row wrap;
 }
 
@@ -1314,6 +1334,9 @@ aside.widget_rss ul li .rssSummary {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-flow: row wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
   flex-flow: row wrap;
 }
 
@@ -1338,6 +1361,61 @@ aside.widget_rss ul li .rssSummary {
 
 .pswp__bg {
   background-color: rgba(0, 0, 0, 0.9);
+}
+
+/**
+# Elementor
+-----------------------------------------------------------------------------*/
+.elementor-section.elementor-section-boxed > .elementor-container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Element Slider */
+.element-slides {
+  position: relative;
+}
+
+.element-slides .element-slides__item a {
+  display: block;
+}
+
+.element-slides.owl-carousel .owl-nav {
+  margin: 0;
+}
+
+.element-slides.owl-carousel .owl-nav button {
+  position: absolute;
+  top: 50%;
+  color: #ffffff;
+  background-color: #333333;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.element-slides.owl-carousel .owl-nav button.owl-prev {
+  left: 10px;
+}
+
+.element-slides.owl-carousel .owl-nav button.owl-next {
+  right: 10px;
+}
+
+.element-slides.owl-carousel .owl-dots {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
 }
 
 /**
@@ -1367,6 +1445,7 @@ aside.widget_rss ul li .rssSummary {
   text-align: right;
   -webkit-flex: 1;
   -ms-flex: 1;
+  -webkit-box-flex: 1;
   flex: 1;
 }
 
@@ -1433,6 +1512,8 @@ aside.widget_rss ul li .rssSummary {
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: space-between;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
   }
   .navbar-toggle {

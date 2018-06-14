@@ -1,0 +1,7 @@
+.elementor-section.elementor-section-boxed > .elementor-container {
+  padding-left: 15px;
+  padding-right: 15px; }
+
+/* Element Slider */
+.element-slides .element-slides__item a {
+  display: block; }
