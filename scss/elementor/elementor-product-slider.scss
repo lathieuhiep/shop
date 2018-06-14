@@ -1,0 +1,30 @@
+/* Element Product Slider */
+.element-product-slider {
+  background-color: #ffffff;
+
+  .element-product-slider__warp {
+    padding: 0 10px;
+  }
+  .product-thumbnail {
+    margin-bottom: 10px;
+  }
+  .product-title {
+    font-size: 14px;
+    margin: 0;
+    font-weight: 400;
+  }
+  .element-slides-nav {
+    &.owl-carousel {
+      .owl-nav {
+        button {
+          &.owl-prev {
+            left: 0;
+          }
+          &.owl-next {
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+}
