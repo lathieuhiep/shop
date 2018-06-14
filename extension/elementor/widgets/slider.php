@@ -145,22 +145,22 @@ class shoptheme_widget_slides extends Widget_Base {
 
     protected function render() {
 
-        $shoptheme_element_settings  =   $this->get_settings_for_display();
+        $shoptheme_elmentor_settings  =   $this->get_settings_for_display();
 
         $shoptheme_slider_settings     =   [
-            'loop'      =>  ( 'yes' === $shoptheme_element_settings['loop'] ),
-            'autoplay'  =>  ( 'yes' === $shoptheme_element_settings['autoplay'] ),
-            'nav'       =>  ( 'yes' === $shoptheme_element_settings['nav'] ),
-            'dots'      =>  ( 'yes' === $shoptheme_element_settings['dots'] ),
+            'loop'      =>  ( 'yes' === $shoptheme_elmentor_settings['loop'] ),
+            'autoplay'  =>  ( 'yes' === $shoptheme_elmentor_settings['autoplay'] ),
+            'nav'       =>  ( 'yes' === $shoptheme_elmentor_settings['nav'] ),
+            'dots'      =>  ( 'yes' === $shoptheme_elmentor_settings['dots'] ),
         ];
 
     ?>
 
-        <div class="element-slides owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $shoptheme_slider_settings ) ); ?>'>
+        <div class="element-slides element-slides-nav element-slides-dots owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $shoptheme_slider_settings ) ); ?>'>
 
             <?php
 
-            foreach ( $shoptheme_element_settings['slides-list'] as $shoptheme_slides_list_item ) :
+            foreach ( $shoptheme_elmentor_settings['slides-list'] as $shoptheme_slides_list_item ) :
                 $shoptheme_slides_image_item   =   $shoptheme_slides_list_item['slides_image'];
                 $shoptheme_slides_btn_item     =   $shoptheme_slides_list_item['slides_link'];
 
