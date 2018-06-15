@@ -26,6 +26,65 @@ function shoptheme_show_products_per_page() {
 }
 /* End limit product */
 
+/* Start add taxonomy woo */
+add_action( 'init', 'shoptheme_register_taxonomy_woo', 10 );
+function shoptheme_register_taxonomy_woo () {
+
+    /* Start Type Product */
+    $shoptheme_taxonomy_product_type = array(
+        'name'              =>  _x( 'Product Collections', 'taxonomy general name', 'shoptheme' ),
+        'singular_name'     =>  _x( 'Product Collections', 'taxonomy singular name', 'shoptheme' ),
+        'search_items'      =>  esc_html__( 'Search Product Type', 'shoptheme' ),
+        'all_items'         =>  esc_html__( 'All Product Type', 'shoptheme' ),
+        'parent_item'       =>  esc_html__( 'Parent category', 'shoptheme' ),
+        'parent_item_colon' =>  esc_html__( 'Parent category:', 'shoptheme' ),
+        'edit_item'         =>  esc_html__( 'Edit category', 'shoptheme' ),
+        'update_item'       =>  esc_html__( 'Update category', 'shoptheme' ),
+        'add_new_item'      =>  esc_html__( 'Add New category', 'shoptheme' ),
+        'new_item_name'     =>  esc_html__( 'New category Name', 'shoptheme' ),
+        'menu_name'         =>  esc_html__( 'Collections', 'shoptheme' ),
+    );
+    $shoptheme_taxonomy_product_type_args = array(
+        'labels'            => $shoptheme_taxonomy_product_type,
+        'hierarchical'      => true,
+        'public'            => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'product-collections' ),
+    );
+    register_taxonomy( 'product_collections', array( 'product' ), $shoptheme_taxonomy_product_type_args );
+    /* End Type Product */
+
+    /* Start Product Origin */
+    $shoptheme_taxonomy_product_origin = array(
+        'name'              =>  _x( 'Product Origin', 'taxonomy general name', 'shoptheme' ),
+        'singular_name'     =>  _x( 'Product Origin', 'taxonomy singular name', 'shoptheme' ),
+        'search_items'      =>  esc_html__( 'Search Product Origin', 'shoptheme' ),
+        'all_items'         =>  esc_html__( 'All Product Origin', 'shoptheme' ),
+        'parent_item'       =>  esc_html__( 'Parent category', 'shoptheme' ),
+        'parent_item_colon' =>  esc_html__( 'Parent category:', 'shoptheme' ),
+        'edit_item'         =>  esc_html__( 'Edit category', 'shoptheme' ),
+        'update_item'       =>  esc_html__( 'Update category', 'shoptheme' ),
+        'add_new_item'      =>  esc_html__( 'Add New category', 'shoptheme' ),
+        'new_item_name'     =>  esc_html__( 'New category Name', 'shoptheme' ),
+        'menu_name'         =>  esc_html__( 'Origin', 'shoptheme' ),
+    );
+    $shoptheme_taxonomy_product_origin_args = array(
+        'labels'            => $shoptheme_taxonomy_product_origin,
+        'hierarchical'      => true,
+        'public'            => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'product-origin' ),
+    );
+    register_taxonomy( 'product_origin', array( 'product' ), $shoptheme_taxonomy_product_origin_args );
+    /* End Product Origin */
+
+}
+/* End add taxonomy woo */
+
 /*
 * Lay Out shoptheme
 */
