@@ -4,6 +4,7 @@
  * shoptheme WooCommerce Hooks
  */
 
+add_action( 'shoptheme_woo_get_price_product', 'woocommerce_template_loop_price', 5 );
 /**
  * Layout
  *
