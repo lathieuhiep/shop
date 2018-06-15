@@ -39,7 +39,7 @@ class shoptheme_widget_product_slider extends Widget_Base {
             'select_product_cat',
             [
                 'label'     =>  esc_html__( 'Choose Product Category', 'shoptheme' ),
-                'type'      =>  Controls_Manager::SELECT2,
+                'type'      =>  Controls_Manager::SELECT,
                 'options'   =>  shoptheme_check_get_cat( 'product_cat' ),
                 'multiple'  =>  true,
             ]
@@ -170,6 +170,8 @@ class shoptheme_widget_product_slider extends Widget_Base {
 
             );
 
+            $shoptheme_prodcut_term = get_term( $shoptheme_prodcut_cat_id[0], 'product_cat' );
+
         else:
 
             $shoptheme_product_args = array(
@@ -190,6 +192,17 @@ class shoptheme_widget_product_slider extends Widget_Base {
     ?>
 
         <div class="element-product-slider">
+
+            <?php if ( !empty( $shoptheme_prodcut_term ) ) : ?>
+
+                <h2 class="element-product-term">
+                    <a href="<?php echo esc_url( get_term_link( $shoptheme_prodcut_term->term_id, 'product_cat' ) ); ?>" title="<?php echo esc_attr( $shoptheme_prodcut_term->name ) ?>">
+                        <?php echo esc_html( $shoptheme_prodcut_term->name ); ?>
+                    </a>
+                </h2>
+
+            <?php endif; ?>
+
             <div class="element-product-slider__warp element-slides-nav text-center owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $shoptheme_slider_settings ) ); ?>'>
 
                 <?php
