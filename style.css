@@ -42,9 +42,9 @@ body {
   line-height: 1.5em;
   overflow-x: hidden;
   font-size: 14px;
-  color: #777777;
+  color: #000000;
   background-color: #f1f1f1;
-  font-family: "Raleway", sans-serif;
+  font-family: "Faustina", serif;
   font-weight: 400;
   display: -webkit-box;
   display: -moz-box;
@@ -67,11 +67,11 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 30px;
   font-weight: 700;
-  color: #333333;
+  color: #000000;
 }
 
 a {
-  color: #777777;
+  color: #000000;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
@@ -167,7 +167,7 @@ pre {
 }
 
 #back-top:hover {
-  background-color: #333333;
+  background-color: #000000;
 }
 
 /* owl carousel navigation */
@@ -355,7 +355,7 @@ a img.aligncenter {
 }
 
 form.post-password-form p label {
-  font-family: "Raleway", sans-serif;
+  font-family: "Faustina", serif;
   float: left;
 }
 
@@ -786,7 +786,7 @@ form.post-password-form p input[type='submit'] {
 }
 
 .site-post-title a {
-  color: #333333;
+  color: #000000;
 }
 
 .site-post-title a:hover {
@@ -819,7 +819,7 @@ form.post-password-form p input[type='submit'] {
 }
 
 .site-post-meta span a:hover {
-  color: #777777;
+  color: #000000;
 }
 
 .site-post-excerpt ul li {
@@ -1358,7 +1358,7 @@ aside.widget_rss ul li .rssSummary {
   border: none;
   color: #ffffff;
   font-weight: 400;
-  background-color: #333333;
+  background-color: #000000;
 }
 
 .woocommerce nav.woocommerce-pagination {
@@ -1392,7 +1392,7 @@ aside.widget_rss ul li .rssSummary {
 
 .woocommerce nav.woocommerce-pagination ul li a:focus {
   background-color: transparent;
-  color: #333333;
+  color: #000000;
 }
 
 .woocommerce nav.woocommerce-pagination ul li span.current,
@@ -1513,7 +1513,7 @@ aside.widget_rss ul li .rssSummary {
 .element-product-slider .element-product-term {
   margin: 0 0 30px;
   padding-left: 15px;
-  font-size: 19px;
+  font-size: 16px;
 }
 
 .element-product-slider .product-price {
