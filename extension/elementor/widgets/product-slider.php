@@ -220,6 +220,10 @@ class shoptheme_widget_product_slider extends Widget_Base {
                                 <?php the_title(); ?>
                             </a>
                         </h3>
+
+                        <div class="product-price">
+                            <?php do_action( 'shoptheme_woo_get_price_product' ); ?>
+                        </div>
                     </div>
 
                 <?php
