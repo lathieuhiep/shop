@@ -360,7 +360,7 @@ if ( ! function_exists( 'shoptheme_fonts_url' ) ) :
             $shoptheme_font_families = array();
 
             if ( 'off' !== $shoptheme_font_google ) {
-                $shoptheme_font_families[] = 'Raleway:300,400,700';
+                $shoptheme_font_families[] = 'Faustina:400,500,700';
             }
 
             $shoptheme_query_args = array(
