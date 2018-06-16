@@ -98,7 +98,7 @@ if ( ! function_exists( 'shoptheme_woo_before_main_content' ) ) :
 
     ?>
 
-        <div class="site-shoptheme">
+        <div class="site-shop">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
@@ -131,7 +131,7 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
 
                 </div><!-- .row -->
             </div><!-- .container -->
-        </div><!-- .site-shoptheme -->
+        </div><!-- .site-shop -->
 
     <?php
 
@@ -139,36 +139,36 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
 
 endif;
 
-if ( ! function_exists( 'shoptheme_woo_before_shoptheme_loop_open' ) ) :
+if ( ! function_exists( 'shoptheme_woo_before_shop_loop_open' ) ) :
     /**
      * Before shoptheme Loop
-     * woocommerce_before_shoptheme_loop hook.
+     * woocommerce_before_shop_loop hook.
      *
-     * @hooked shoptheme_woo_before_shoptheme_loop_open - 5
+     * @hooked shoptheme_woo_before_shop_loop_open - 5
      */
-    function shoptheme_woo_before_shoptheme_loop_open() {
+    function shoptheme_woo_before_shop_loop_open() {
 
     ?>
 
-        <div class="site-shoptheme__result-count-ordering d-flex align-items-center justify-content-between">
+        <div class="site-shop__result-count-ordering d-flex align-items-center justify-content-between">
 
     <?php
     }
 
 endif;
 
-if ( ! function_exists( 'shoptheme_woo_before_shoptheme_loop_close' ) ) :
+if ( ! function_exists( 'shoptheme_woo_before_shop_loop_close' ) ) :
     /**
-     * Before shoptheme Loop
-     * woocommerce_before_shoptheme_loop hook.
+     * Before shop loop
+     * woocommerce_before_shop_loop hook.
      *
-     * @hooked shoptheme_woo_before_shoptheme_loop_close - 35
+     * @hooked shoptheme_woo_before_shop_loop_close - 35
      */
-    function shoptheme_woo_before_shoptheme_loop_close() {
+    function shoptheme_woo_before_shop_loop_close() {
 
     ?>
 
-        </div><!-- .site-shoptheme__result-count-ordering -->
+        </div><!-- .site-shop__result-count-ordering -->
 
     <?php
     }
@@ -193,7 +193,7 @@ if ( ! function_exists( 'shoptheme_woo_before_single_product' ) ) :
 
     ?>
 
-        <div class="site-shoptheme-single">
+        <div class="site-shop-single">
 
     <?php
 
@@ -215,7 +215,7 @@ if ( ! function_exists( 'shoptheme_woo_after_single_product' ) ) :
 
     ?>
 
-        </div><!-- .site-shoptheme-single -->
+        </div><!-- .site-shop-single -->
 
     <?php
 
@@ -236,7 +236,7 @@ if ( !function_exists( 'shoptheme_woo_before_single_product_summary_open_warp' )
 
     ?>
 
-        <div class="site-shoptheme-single__warp">
+        <div class="site-shop-single__warp">
 
     <?php
 
@@ -257,7 +257,7 @@ if ( !function_exists( 'shoptheme_woo_after_single_product_summary_close_warp' )
 
     ?>
 
-        </div><!-- .site-shoptheme-single__warp -->
+        </div><!-- .site-shop-single__warp -->
 
     <?php
 
@@ -277,7 +277,7 @@ if ( ! function_exists( 'shoptheme_woo_before_single_product_summary_open' ) ) :
 
     ?>
 
-        <div class="site-shoptheme-single__gallery-box">
+        <div class="site-shop-single__gallery-box">
 
     <?php
 
@@ -297,7 +297,7 @@ if ( ! function_exists( 'shoptheme_woo_before_single_product_summary_close' ) ) 
 
     ?>
 
-        </div><!-- .site-shoptheme-single__gallery-box -->
+        </div><!-- .site-shop-single__gallery-box -->
 
     <?php
 
