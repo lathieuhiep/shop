@@ -152,38 +152,24 @@ class shoptheme_widget_product_slider extends Widget_Base {
             'dots'          =>  ( 'yes' === $shoptheme_elmentor_settings['dots'] ),
         ];
 
-        if ( !empty( $shoptheme_prodcut_cat_id ) ) :
 
-            $shoptheme_product_args = array(
+        $shoptheme_product_args = array(
 
-                'post_type'         =>  'product',
-                'posts_per_page'    =>  $shoptheme_prodcut_limit,
-                'orderby'           =>  $shoptheme_prodcut_order_by,
-                'order'             =>  $shoptheme_prodcut_order,
-                'tax_query'         =>  array(
-                    array(
-                        'taxonomy'  =>  'product_cat',
-                        'field'     =>  'id',
-                        'terms'     =>   $shoptheme_prodcut_cat_id
-                    )
+            'post_type'         =>  'product',
+            'posts_per_page'    =>  $shoptheme_prodcut_limit,
+            'orderby'           =>  $shoptheme_prodcut_order_by,
+            'order'             =>  $shoptheme_prodcut_order,
+            'tax_query'         =>  array(
+                array(
+                    'taxonomy'  =>  'product_cat',
+                    'field'     =>  'id',
+                    'terms'     =>   $shoptheme_prodcut_cat_id
                 )
+            )
 
-            );
+        );
 
-            $shoptheme_prodcut_term = get_term( $shoptheme_prodcut_cat_id[0], 'product_cat' );
-
-        else:
-
-            $shoptheme_product_args = array(
-
-                'post_type'         =>  'product',
-                'posts_per_page'    =>  $shoptheme_prodcut_limit,
-                'orderby'           =>  $shoptheme_prodcut_order_by,
-                'order'             =>  $shoptheme_prodcut_order,
-
-            );
-
-        endif;
+        $shoptheme_prodcut_term = get_term( $shoptheme_prodcut_cat_id[0], 'product_cat' );
 
         $shoptheme_product_query    =   new \ WP_Query( $shoptheme_product_args ) ;
 
@@ -192,18 +178,15 @@ class shoptheme_widget_product_slider extends Widget_Base {
     ?>
 
         <div class="element-product-slider">
-
-            <?php if ( !empty( $shoptheme_prodcut_term ) ) : ?>
-
+            <div class="element-product-slider__top">
                 <h2 class="element-product-term">
                     <a href="<?php echo esc_url( get_term_link( $shoptheme_prodcut_term->term_id, 'product_cat' ) ); ?>" title="<?php echo esc_attr( $shoptheme_prodcut_term->name ) ?>">
                         <?php echo esc_html( $shoptheme_prodcut_term->name ); ?>
                     </a>
                 </h2>
+            </div>
 
-            <?php endif; ?>
-
-            <div class="element-product-slider__warp element-slides-nav text-center owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $shoptheme_slider_settings ) ); ?>'>
+            <div class="element-product-slider__warp text-center owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $shoptheme_slider_settings ) ); ?>'>
 
                 <?php
                 while ( $shoptheme_product_query->have_posts() ) :

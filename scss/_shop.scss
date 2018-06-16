@@ -52,6 +52,10 @@
             color: #ffffff;
             font-weight: $font-weight-regular;
             background-color: $background-primary;
+
+            &:hover {
+              background-color: $background-hover;
+            }
           }
         }
       }

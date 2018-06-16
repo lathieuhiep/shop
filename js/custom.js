@@ -135,7 +135,7 @@
 
                 let $settings_slider    =   $(this).data( 'settings' ),
                     $item_number        =   4,
-                    $margin_item        =   30,
+                    $margin_item        =   15,
                     $loop_slider        =   false,
                     $autoplay           =   false,
                     $active_dots        =   false,
@@ -147,7 +147,7 @@
                 if ( $settings_slider !== undefined ) {
 
                     $item_number        =   typeof ( $settings_slider['number_item'] ) !== "undefined" ? parseInt( $settings_slider['number_item'] ) : 4;
-                    $margin_item        =   typeof ( $settings_slider['margin_item'] ) !== "undefined" ? parseInt( $settings_slider['margin_item'] ) : 30;
+                    $margin_item        =   typeof ( $settings_slider['margin_item'] ) !== "undefined" ? parseInt( $settings_slider['margin_item'] ) : 15;
                     $loop_slider        =   typeof ( $settings_slider['loop'] ) !== "undefined" ? $settings_slider['loop'] : false;
                     $autoplay           =   typeof ( $settings_slider['autoplay'] ) !== "undefined" ? $settings_slider['autoplay']: false;
                     $active_dots        =   typeof ( $settings_slider['dots'] ) !== "undefined" ? $settings_slider['dots'] : false;
