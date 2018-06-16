@@ -869,14 +869,22 @@ form.post-password-form p input[type='submit'] {
 /**
 # Sidebar
 -----------------------------------------------------------------------------*/
+.sidebar-content {
+  background-color: #ffffff;
+  padding: 15px;
+}
+
 aside {
   margin-bottom: 30px;
 }
 
+aside:last-child {
+  margin-bottom: 0;
+}
+
 aside .widget-title {
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  font-size: 18px;
+  margin-bottom: 15px;
+  font-size: 15px;
 }
 
 aside ul {
@@ -887,8 +895,11 @@ aside ul {
 
 aside ul li {
   border-bottom: 1px solid #eee;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 0;
+}
+
+aside ul li:first-child {
+  padding-top: 0;
 }
 
 aside ul li a {
@@ -1295,6 +1306,11 @@ aside.widget_rss ul li .rssSummary {
   padding: 50px 0;
 }
 
+.site-shop__box {
+  background-color: #ffffff;
+  padding: 15px;
+}
+
 .site-shop__result-count-ordering {
   margin-bottom: 30px;
 }
@@ -1632,6 +1648,12 @@ aside.widget_rss ul li .rssSummary {
 /**
 # Responsive
 -----------------------------------------------------------------------------*/
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
 @media (min-width: 992px) and (max-width: 1400px) {
   .site-menu ul li:nth-last-child(1) .sub-menu,
   .site-menu ul li:nth-last-child(2) .sub-menu {

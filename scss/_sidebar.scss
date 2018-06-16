@@ -1,10 +1,16 @@
+.sidebar-content {
+  background-color: #ffffff;
+  padding: 15px;
+}
 aside {
   margin-bottom: 30px;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
   .widget-title {
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    font-size: 18px;
+    margin-bottom: 15px;
+    font-size: 15px;
   }
   ul {
     list-style: none;
@@ -13,9 +19,11 @@ aside {
 
     li {
       border-bottom: 1px solid #eee;
-      padding-top: 10px;
-      padding-bottom: 10px;
+      padding: 10px 0;
 
+      &:first-child {
+        padding-top: 0;
+      }
       a {
         display: block;
 
