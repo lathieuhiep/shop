@@ -16,7 +16,7 @@ function shoptheme_shoptheme_setup() {
 }
 
 /* Start limit product */
-add_filter('loop_shoptheme_per_page', 'shoptheme_show_products_per_page');
+add_filter('loop_shop_per_page', 'shoptheme_show_products_per_page');
 
 function shoptheme_show_products_per_page() {
 
@@ -102,6 +102,7 @@ if ( ! function_exists( 'shoptheme_woo_before_main_content' ) ) :
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
+                        <div class="site-shop__box">
 
     <?php
 
@@ -117,7 +118,7 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
     function shoptheme_woo_after_main_content() {
 
     ?>
-
+                        </div>
                     </div><!-- .col-md-9 -->
 
                     <?php
