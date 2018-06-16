@@ -22,8 +22,8 @@ remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 
 add_action( 'woocommerce_before_main_content', 'shoptheme_woo_before_main_content', 10 );
 
-add_action( 'woocommerce_before_shoptheme_loop', 'shoptheme_woo_before_shoptheme_loop_open',  5 );
-add_action( 'woocommerce_before_shoptheme_loop', 'shoptheme_woo_before_shoptheme_loop_close',  35 );
+add_action( 'woocommerce_before_shop_loop', 'shoptheme_woo_before_shop_loop_open',  5 );
+add_action( 'woocommerce_before_shop_loop', 'shoptheme_woo_before_shop_loop_close',  35 );
 
 add_action( 'shoptheme_woo_sidebar', 'woocommerce_get_sidebar', 10 );
 
