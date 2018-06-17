@@ -11,6 +11,8 @@ add_action( 'shoptheme_woo_get_price_product', 'woocommerce_template_loop_price'
  * @see shoptheme_woo_before_main_content()
  * @see shoptheme_woo_before_shoptheme_loop_open()
  * @see shoptheme_woo_before_shoptheme_loop_close()
+ * @see shoptheme_woo_before_shop_loop_item()
+ * @see shoptheme_woo_after_shop_loop_item()
  * @see shoptheme_woo_after_main_content()
  */
 
@@ -24,6 +26,9 @@ add_action( 'woocommerce_before_main_content', 'shoptheme_woo_before_main_conten
 
 add_action( 'woocommerce_before_shop_loop', 'shoptheme_woo_before_shop_loop_open',  5 );
 add_action( 'woocommerce_before_shop_loop', 'shoptheme_woo_before_shop_loop_close',  35 );
+
+add_action ( 'woocommerce_before_shop_loop_item', 'shoptheme_woo_before_shop_loop_item', 5 );
+add_action ( 'woocommerce_after_shop_loop_item', 'shoptheme_woo_after_shop_loop_item', 15 );
 
 add_action( 'shoptheme_woo_sidebar', 'woocommerce_get_sidebar', 10 );
 
