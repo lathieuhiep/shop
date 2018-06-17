@@ -176,6 +176,36 @@ if ( ! function_exists( 'shoptheme_woo_before_shop_loop_close' ) ) :
 
 endif;
 
+if ( ! function_exists( 'shoptheme_woo_before_shop_loop_item' ) ) :
+    /**
+     * Hook: woocommerce_before_shop_loop_item.
+     *
+     * @hooked shoptheme_woo_before_shop_loop_item - 5
+     */
+    function shoptheme_woo_before_shop_loop_item() {
+?>
+
+    <div class="site-shop__product--item">
+
+<?php
+    }
+endif;
+
+if ( ! function_exists( 'shoptheme_woo_after_shop_loop_item' ) ) :
+    /**
+     * Hook: woocommerce_after_shop_loop_item.
+     *
+     * @hooked shoptheme_woo_after_shop_loop_item - 15
+     */
+    function shoptheme_woo_after_shop_loop_item() {
+?>
+
+    </div><!-- .site-shop__product--item -->
+
+<?php
+    }
+endif;
+
 /*
 * Single shoptheme
 */
