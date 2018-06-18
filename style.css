@@ -1318,6 +1318,7 @@ aside.widget_rss ul li .rssSummary {
   background-color: #ffffff;
   padding: 15px;
   border: 1px solid #dddddd;
+  height: 100%;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;

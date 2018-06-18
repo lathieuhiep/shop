@@ -13,6 +13,7 @@
   background-color: #ffffff;
   padding: 15px;
   border: 1px solid #dddddd;
+  height: 100%;
   @include flexbox();
   @include align-items(center);
   @include flex-direction(column);
