@@ -1,9 +1,7 @@
-.sidebar-content {
-  background-color: #ffffff;
-  padding: 15px;
-}
 aside {
   margin-bottom: 30px;
+  background-color: #ffffff;
+  padding: 15px;
 
   &:last-child {
     margin-bottom: 0;
@@ -23,6 +21,10 @@ aside {
 
       &:first-child {
         padding-top: 0;
+      }
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
       }
       a {
         display: block;
