@@ -169,11 +169,11 @@ class shoptheme_widget_product_slider extends Widget_Base {
 
         );
 
-        $shoptheme_prodcut_term = get_term( $shoptheme_prodcut_cat_id[0], 'product_cat' );
-
         $shoptheme_product_query    =   new \ WP_Query( $shoptheme_product_args ) ;
 
         if ( $shoptheme_product_query->have_posts() ) :
+
+            $shoptheme_prodcut_term = get_term( $shoptheme_prodcut_cat_id, 'product_cat' );
 
     ?>
 
