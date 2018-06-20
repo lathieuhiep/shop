@@ -34,6 +34,12 @@ add_action( 'shoptheme_woo_sidebar', 'woocommerce_get_sidebar', 10 );
 
 add_action( 'woocommerce_after_main_content', 'shoptheme_woo_after_main_content', 10 );
 
+/**
+ * Product Category
+ *
+ * @see shoptheme_woo_get_product_cat_filter()
+ */
+add_action( 'shoptheme_woo_product_cat_filter', 'shoptheme_woo_get_product_cat_filter', 10 );
 
 /**
  * Single Product

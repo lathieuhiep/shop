@@ -51,6 +51,7 @@ function shoptheme_register_taxonomy_woo () {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
+        'update_count_callback' => '_update_post_term_count',
         'rewrite'           => array( 'slug' => 'product-collections' ),
     );
     register_taxonomy( 'product_collections', array( 'product' ), $shoptheme_taxonomy_product_type_args );
@@ -76,6 +77,7 @@ function shoptheme_register_taxonomy_woo () {
         'public'            => true,
         'show_ui'           => true,
         'show_admin_column' => true,
+        'update_count_callback' => '_update_post_term_count',
         'query_var'         => true,
         'rewrite'           => array( 'slug' => 'product-vendor' ),
     );
@@ -86,7 +88,7 @@ function shoptheme_register_taxonomy_woo () {
 /* End add taxonomy woo */
 
 /*
-* Lay Out shoptheme
+* Lay Out woo
 */
 
 if ( ! function_exists( 'shoptheme_woo_before_main_content' ) ) :
@@ -127,7 +129,12 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
                      *
                      * @hooked shoptheme_woo_sidebar - 10
                      */
-                    do_action( 'shoptheme_woo_sidebar' );
+                    if ( is_product_category() ) :
+                        do_action( 'shoptheme_woo_product_cat_filter' );
+                    else:
+                        do_action( 'shoptheme_woo_sidebar' );
+                    endif;
+
                     ?>
 
                 </div><!-- .row -->
@@ -207,7 +214,27 @@ if ( ! function_exists( 'shoptheme_woo_after_shop_loop_item' ) ) :
 endif;
 
 /*
-* Single shoptheme
+* Category woo
+*/
+
+if ( !function_exists( 'shoptheme_woo_get_product_cat_filter' ) ) :
+
+    function shoptheme_woo_get_product_cat_filter() {
+
+    ?>
+
+        <div class="col-md-3">
+            <div class="sidebar-filter-shop"></div>
+        </div>
+
+    <?php
+        
+    }
+
+endif;
+
+/*
+* Single woo
 */
 
 if ( ! function_exists( 'shoptheme_woo_before_single_product' ) ) :
