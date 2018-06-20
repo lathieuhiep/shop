@@ -1409,8 +1409,15 @@ aside.widget_rss ul li .rssSummary {
   line-height: 1.4em;
 }
 
+.woocommerce ul.products li.product .price {
+  font-size: 14px;
+  color: #ff5555;
+  font-weight: 700;
+}
+
 .woocommerce ul.products li.product .price del {
   display: inline-block;
+  margin-right: 5px;
 }
 
 .woocommerce ul.products li.product .price ins {

@@ -73,8 +73,13 @@
             line-height: 1.4em;
           }
           .price {
+            font-size: 14px;
+            color: #ff5555;
+            font-weight: 700;
+
             del {
               display: inline-block;
+              margin-right: 5px;
             }
             ins {
               display: inline-block;
