@@ -32,8 +32,8 @@ function shoptheme_register_taxonomy_woo () {
 
     /* Start Type Product */
     $shoptheme_taxonomy_product_type = array(
-        'name'              =>  _x( 'Product Collections', 'taxonomy general name', 'shoptheme' ),
-        'singular_name'     =>  _x( 'Product Collections', 'taxonomy singular name', 'shoptheme' ),
+        'name'              =>  _x( 'Collections', 'taxonomy general name', 'shoptheme' ),
+        'singular_name'     =>  _x( 'Collections', 'taxonomy singular name', 'shoptheme' ),
         'search_items'      =>  esc_html__( 'Search Product Type', 'shoptheme' ),
         'all_items'         =>  esc_html__( 'All Product Type', 'shoptheme' ),
         'parent_item'       =>  esc_html__( 'Parent category', 'shoptheme' ),
@@ -58,17 +58,17 @@ function shoptheme_register_taxonomy_woo () {
 
     /* Start Product Origin */
     $shoptheme_taxonomy_product_origin = array(
-        'name'              =>  _x( 'Product Origin', 'taxonomy general name', 'shoptheme' ),
-        'singular_name'     =>  _x( 'Product Origin', 'taxonomy singular name', 'shoptheme' ),
-        'search_items'      =>  esc_html__( 'Search Product Origin', 'shoptheme' ),
-        'all_items'         =>  esc_html__( 'All Product Origin', 'shoptheme' ),
+        'name'              =>  _x( 'Vendor', 'taxonomy general name', 'shoptheme' ),
+        'singular_name'     =>  _x( 'Vendor', 'taxonomy singular name', 'shoptheme' ),
+        'search_items'      =>  esc_html__( 'Search Product Vendor', 'shoptheme' ),
+        'all_items'         =>  esc_html__( 'All Vendor', 'shoptheme' ),
         'parent_item'       =>  esc_html__( 'Parent category', 'shoptheme' ),
         'parent_item_colon' =>  esc_html__( 'Parent category:', 'shoptheme' ),
         'edit_item'         =>  esc_html__( 'Edit category', 'shoptheme' ),
         'update_item'       =>  esc_html__( 'Update category', 'shoptheme' ),
         'add_new_item'      =>  esc_html__( 'Add New category', 'shoptheme' ),
         'new_item_name'     =>  esc_html__( 'New category Name', 'shoptheme' ),
-        'menu_name'         =>  esc_html__( 'Origin', 'shoptheme' ),
+        'menu_name'         =>  esc_html__( 'Vendor', 'shoptheme' ),
     );
     $shoptheme_taxonomy_product_origin_args = array(
         'labels'            => $shoptheme_taxonomy_product_origin,
@@ -77,9 +77,9 @@ function shoptheme_register_taxonomy_woo () {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'product-origin' ),
+        'rewrite'           => array( 'slug' => 'product-vendor' ),
     );
-    register_taxonomy( 'product_origin', array( 'product' ), $shoptheme_taxonomy_product_origin_args );
+    register_taxonomy( 'product_vendor', array( 'product' ), $shoptheme_taxonomy_product_origin_args );
     /* End Product Origin */
 
 }
