@@ -228,7 +228,7 @@ if ( !function_exists( 'shoptheme_woo_get_product_cat_filter' ) ) :
         </div>
 
     <?php
-        
+
     }
 
 endif;
