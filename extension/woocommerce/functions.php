@@ -45,14 +45,14 @@ function shoptheme_register_taxonomy_woo () {
         'menu_name'         =>  esc_html__( 'Collections', 'shoptheme' ),
     );
     $shoptheme_taxonomy_product_type_args = array(
-        'labels'            => $shoptheme_taxonomy_product_type,
-        'hierarchical'      => true,
-        'public'            => true,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'query_var'         => true,
-        'update_count_callback' => '_update_post_term_count',
-        'rewrite'           => array( 'slug' => 'product-collections' ),
+        'labels'                =>  $shoptheme_taxonomy_product_type,
+        'hierarchical'          =>  true,
+        'public'                =>  true,
+        'show_ui'               =>  true,
+        'show_admin_column'     =>  true,
+        'query_var'             =>  true,
+        'update_count_callback' =>  '_update_post_term_count',
+        'rewrite'               =>  array( 'slug' => 'product-collections' ),
     );
     register_taxonomy( 'product_collections', array( 'product' ), $shoptheme_taxonomy_product_type_args );
     /* End Type Product */
@@ -72,14 +72,14 @@ function shoptheme_register_taxonomy_woo () {
         'menu_name'         =>  esc_html__( 'Vendor', 'shoptheme' ),
     );
     $shoptheme_taxonomy_product_origin_args = array(
-        'labels'            => $shoptheme_taxonomy_product_origin,
-        'hierarchical'      => true,
-        'public'            => true,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'update_count_callback' => '_update_post_term_count',
-        'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'product-vendor' ),
+        'labels'                =>  $shoptheme_taxonomy_product_origin,
+        'hierarchical'          =>  true,
+        'public'                =>  true,
+        'show_ui'               =>  true,
+        'show_admin_column'     =>  true,
+        'update_count_callback' =>  '_update_post_term_count',
+        'query_var'             =>  true,
+        'rewrite'               =>  array( 'slug' => 'product-vendor' ),
     );
     register_taxonomy( 'product_vendor', array( 'product' ), $shoptheme_taxonomy_product_origin_args );
     /* End Product Origin */
@@ -107,6 +107,7 @@ function shoptheme_product_cat_add_new_meta_field() {
 
     $shoptheme_get_product_collections = shoptheme_get_product_collections();
 
+    if ( !empty( $shoptheme_get_product_collections ) ) :
 ?>
 
     <div class="form-field">
@@ -128,6 +129,7 @@ function shoptheme_product_cat_add_new_meta_field() {
     </div>
 
 <?php
+    endif;
 }
 
 // Edit term page
