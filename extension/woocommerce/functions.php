@@ -87,6 +87,118 @@ function shoptheme_register_taxonomy_woo () {
 }
 /* End add taxonomy woo */
 
+/* Start create metabox product cat */
+
+function shoptheme_get_product_collections() {
+
+    return $shoptheme_get_product_collections = get_terms( 'product_collections',
+        array(
+            'orderby' => 'count',
+            'hide_empty' => 0
+        )
+    );
+
+};
+
+// Add term page
+add_action( 'product_cat_add_form_fields', 'shoptheme_product_cat_add_new_meta_field', 10, 2 );
+
+function shoptheme_product_cat_add_new_meta_field() {
+
+    $shoptheme_get_product_collections = shoptheme_get_product_collections();
+
+?>
+
+    <div class="form-field">
+        <label for="term-collections">
+            <?php esc_html_e( 'Collections', 'shoptheme' ); ?>
+        </label>
+
+        <?php foreach ( $shoptheme_get_product_collections as $shoptheme_product_collections_item ): ?>
+
+            <div class="form-field__item">
+                <label for="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>">
+                    <input type="checkbox" name="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>" value="<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>">
+
+                    <?php echo esc_html( $shoptheme_product_collections_item->name ) . '&nbsp;' . '('. esc_html( $shoptheme_product_collections_item->count ) . ')'; ?>
+                </label>
+            </div>
+
+        <?php endforeach; ?>
+    </div>
+
+<?php
+}
+
+// Edit term page
+add_action( 'product_cat_edit_form_fields', 'shoptheme_product_cat_edit_meta_field', 10, 2 );
+function shoptheme_product_cat_edit_meta_field( $shoptheme_product_term ) {
+
+    $t_id = $shoptheme_product_term->term_id;
+
+    $term_meta = get_option( "taxonomy_$t_id" );
+
+    $shoptheme_get_product_collections = shoptheme_get_product_collections();
+
+?>
+
+    <tr>
+        <th>
+            <label for="term-collections">
+                <?php esc_html_e( 'Collections', 'shoptheme' ); ?>
+            </label>
+        </th>
+
+        <td>
+            <div class="form-field">
+
+                <?php
+                foreach ( $shoptheme_get_product_collections as $shoptheme_product_collections_item ):
+
+                    $shoptheme_check_product_collections = get_term_meta( $shoptheme_product_term->term_id, 'term-collections-'. $shoptheme_product_collections_item->term_id, true );
+
+                ?>
+
+                    <div class="form-field__item">
+                        <label for="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>">
+                            <input type="checkbox" name="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>" value="<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>" <?php echo ( $shoptheme_check_product_collections ) ? checked( $shoptheme_check_product_collections, $shoptheme_product_collections_item->term_id ) : ''; ?>>
+
+                            <?php echo esc_html( $shoptheme_product_collections_item->name ) . '&nbsp;' . '('. esc_html( $shoptheme_product_collections_item->count ) . ')'; ?>
+                        </label>
+                    </div>
+
+                <?php endforeach; ?>
+
+                <div class=""></div>
+
+            </div>
+        </td>
+    </tr>
+
+<?php
+
+}
+
+// Save extra taxonomy fields callback function.
+function shoptheme_taxonomy_custom_meta( $shoptheme_product_term_id ) {
+
+    $shoptheme_get_product_collections = shoptheme_get_product_collections();
+
+    foreach ( $shoptheme_get_product_collections as $shoptheme_product_collections_item ):
+
+        if ( isset( $_POST[ 'term-collections-'. $shoptheme_product_collections_item->term_id ] ) ) {
+            update_term_meta( $shoptheme_product_term_id, 'term-collections-'. $shoptheme_product_collections_item->term_id, $shoptheme_product_collections_item->term_id );
+        } else {
+            update_term_meta( $shoptheme_product_term_id, 'term-collections-'. $shoptheme_product_collections_item->term_id, '' );
+        }
+
+    endforeach;
+
+}
+add_action( 'edited_product_cat', 'shoptheme_taxonomy_custom_meta', 10, 2 );
+add_action( 'create_product_cat', 'shoptheme_taxonomy_custom_meta', 10, 2 );
+/* End create metabox product cat */
+
 /*
 * Lay Out woo
 */
