@@ -93,19 +93,28 @@ function shoptheme_get_product_collections() {
 
     return $shoptheme_get_product_collections = get_terms( 'product_collections',
         array(
-            'orderby' => 'count',
             'hide_empty' => 0
         )
     );
 
 };
 
+function shoptheme_get_product_vendor() {
+
+    return $shoptheme_get_product_collections = get_terms( 'product_vendor',
+        array(
+            'hide_empty' => 0
+        )
+    );
+
+};
 // Add term page
 add_action( 'product_cat_add_form_fields', 'shoptheme_product_cat_add_new_meta_field', 10, 2 );
 
 function shoptheme_product_cat_add_new_meta_field() {
 
     $shoptheme_get_product_collections = shoptheme_get_product_collections();
+    $shoptheme_get_product_vendor      = shoptheme_get_product_vendor();
 
     if ( !empty( $shoptheme_get_product_collections ) ) :
 ?>
@@ -130,18 +139,39 @@ function shoptheme_product_cat_add_new_meta_field() {
 
 <?php
     endif;
+
+    if ( !empty( $shoptheme_get_product_vendor ) ) :
+?>
+
+        <div class="form-field">
+            <label for="term-collections">
+                <?php esc_html_e( 'Vendor', 'shoptheme' ); ?>
+            </label>
+
+            <?php foreach ( $shoptheme_get_product_vendor as $shoptheme_get_product_vendor_item ): ?>
+
+                <div class="form-field__item">
+                    <label for="term-vendor-<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>">
+                        <input type="checkbox" name="term-vendor-<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>" value="<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>">
+
+                        <?php echo esc_html( $shoptheme_get_product_vendor_item->name ) . '&nbsp;' . '('. esc_html( $shoptheme_get_product_vendor_item->count ) . ')'; ?>
+                    </label>
+                </div>
+
+            <?php endforeach; ?>
+        </div>
+
+<?php
+    endif;
 }
 
 // Edit term page
 add_action( 'product_cat_edit_form_fields', 'shoptheme_product_cat_edit_meta_field', 10, 2 );
+
 function shoptheme_product_cat_edit_meta_field( $shoptheme_product_term ) {
 
-    $t_id = $shoptheme_product_term->term_id;
-
-    $term_meta = get_option( "taxonomy_$t_id" );
-
     $shoptheme_get_product_collections = shoptheme_get_product_collections();
-
+    $shoptheme_get_product_vendor      = shoptheme_get_product_vendor();
 ?>
 
     <tr>
@@ -171,7 +201,36 @@ function shoptheme_product_cat_edit_meta_field( $shoptheme_product_term ) {
 
                 <?php endforeach; ?>
 
-                <div class=""></div>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            <label for="term-vendor">
+                <?php esc_html_e( 'Vendor', 'shoptheme' ); ?>
+            </label>
+        </th>
+
+        <td>
+            <div class="form-field">
+
+                <?php
+                foreach ( $shoptheme_get_product_vendor as $shoptheme_get_product_vendor_item ):
+
+                    $shoptheme_check_product_vendor = get_term_meta( $shoptheme_product_term->term_id, 'term-vendor-'. $shoptheme_get_product_vendor_item->term_id, true );
+
+                    ?>
+
+                    <div class="form-field__item">
+                        <label for="term-vendor-<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>">
+                            <input type="checkbox" name="term-vendor-<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>" value="<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>" <?php echo ( $shoptheme_check_product_vendor ) ? checked( $shoptheme_check_product_vendor, $shoptheme_get_product_vendor_item->term_id ) : ''; ?>>
+
+                            <?php echo esc_html( $shoptheme_get_product_vendor_item->name ) . '&nbsp;' . '('. esc_html( $shoptheme_get_product_vendor_item->count ) . ')'; ?>
+                        </label>
+                    </div>
+
+                <?php endforeach; ?>
 
             </div>
         </td>
@@ -185,6 +244,7 @@ function shoptheme_product_cat_edit_meta_field( $shoptheme_product_term ) {
 function shoptheme_taxonomy_custom_meta( $shoptheme_product_term_id ) {
 
     $shoptheme_get_product_collections = shoptheme_get_product_collections();
+    $shoptheme_get_product_vendor      = shoptheme_get_product_vendor();
 
     foreach ( $shoptheme_get_product_collections as $shoptheme_product_collections_item ):
 
@@ -192,6 +252,16 @@ function shoptheme_taxonomy_custom_meta( $shoptheme_product_term_id ) {
             update_term_meta( $shoptheme_product_term_id, 'term-collections-'. $shoptheme_product_collections_item->term_id, $shoptheme_product_collections_item->term_id );
         } else {
             update_term_meta( $shoptheme_product_term_id, 'term-collections-'. $shoptheme_product_collections_item->term_id, '' );
+        }
+
+    endforeach;
+
+    foreach ( $shoptheme_get_product_vendor as $shoptheme_get_product_vendor_item ):
+
+        if ( isset( $_POST[ 'term-vendor-'. $shoptheme_get_product_vendor_item->term_id ] ) ) {
+            update_term_meta( $shoptheme_product_term_id, 'term-vendor-'. $shoptheme_get_product_vendor_item->term_id, $shoptheme_get_product_vendor_item->term_id );
+        } else {
+            update_term_meta( $shoptheme_product_term_id, 'term-vendor-'. $shoptheme_get_product_vendor_item->term_id, '' );
         }
 
     endforeach;
@@ -217,6 +287,12 @@ if ( ! function_exists( 'shoptheme_woo_before_main_content' ) ) :
         <div class="site-shop">
             <div class="container">
                 <div class="row">
+                    <?php
+                        if ( is_product_category() ) :
+                            do_action( 'shoptheme_woo_product_cat_filter' );
+                        endif;
+                    ?>
+
                     <div class="col-md-9">
                         <div class="site-shop__box">
 
@@ -243,9 +319,7 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
                      *
                      * @hooked shoptheme_woo_sidebar - 10
                      */
-                    if ( is_product_category() ) :
-                        do_action( 'shoptheme_woo_product_cat_filter' );
-                    else:
+                    if ( !is_product_category() ) :
                         do_action( 'shoptheme_woo_sidebar' );
                     endif;
 
@@ -335,10 +409,91 @@ if ( !function_exists( 'shoptheme_woo_get_product_cat_filter' ) ) :
 
     function shoptheme_woo_get_product_cat_filter() {
 
+        $shoptheme_get_product_cat_id               =   get_queried_object_id();
+        $shoptheme_get_product_collections          =   shoptheme_get_product_collections();
+        $shoptheme_get_product_vendor               =   shoptheme_get_product_vendor();
+        $shoptheme_get_product_meta_collections_ids =   $shoptheme_get_product_meta_vendor_ids = array();
+
+        /* Collections */
+        foreach ( $shoptheme_get_product_collections as $shoptheme_get_product_collections_item ):
+
+            $shoptheme_get_product_meta_collections   =  get_term_meta( $shoptheme_get_product_cat_id, 'term-collections-' . $shoptheme_get_product_collections_item->term_id, true );
+
+            if ( !empty( $shoptheme_get_product_meta_collections ) ) :
+
+                $shoptheme_get_product_meta_collections_ids[] .= $shoptheme_get_product_meta_collections;
+
+            endif;
+
+        endforeach;
+
+        /* Vendor */
+        foreach ( $shoptheme_get_product_vendor as $shoptheme_get_product_vendor_item ):
+
+            $shoptheme_get_product_meta_vendor   =  get_term_meta( $shoptheme_get_product_cat_id, 'term-vendor-' . $shoptheme_get_product_vendor_item->term_id, true );
+
+            if ( !empty( $shoptheme_get_product_meta_vendor ) ) :
+
+                $shoptheme_get_product_meta_vendor_ids[] .= $shoptheme_get_product_meta_vendor;
+
+            endif;
+
+        endforeach;
+
     ?>
 
         <div class="col-md-3">
-            <div class="sidebar-filter-shop"></div>
+            <div class="sidebar-filter-shop">
+                <!-- Vendor -->
+                <aside class="widget widget-filter-product-term">
+                    <h2 class="widget-title">
+                        <?php esc_html_e( 'Vendor', 'shoptheme' ); ?>
+                    </h2>
+
+                    <?php
+                    foreach ( $shoptheme_get_product_meta_vendor_ids as $shoptheme_get_product_meta_vendor_id ) :
+                        $shoptheme_term_vendor = get_term( $shoptheme_get_product_meta_vendor_id, 'product_vendor' );
+                    ?>
+
+                        <div class="widget-filter-product-term__item">
+                            <label>
+                                <input class="product_vendor_check" type="checkbox" name="<?php echo esc_attr( $shoptheme_term_vendor->slug ); ?>" value="<?php echo esc_attr( $shoptheme_term_vendor->term_id ); ?>" data-filter="product_vendor" />
+
+                                <span>
+                                    <?php echo esc_html( $shoptheme_term_vendor->name ); ?>
+                                </span>
+                            </label>
+                        </div>
+
+                    <?php endforeach; ?>
+                </aside>
+
+                <!-- Collections -->
+                <aside class="widget widget-filter-product-term">
+                    <h2 class="widget-title">
+                        <?php esc_html_e( 'Collections', 'shoptheme' ); ?>
+                    </h2>
+
+                    <?php
+                    foreach ( $shoptheme_get_product_meta_collections_ids as $shoptheme_get_product_meta_collections_id ) :
+                        $shoptheme_term_collection = get_term( $shoptheme_get_product_meta_collections_id, 'product_collections' );
+                    ?>
+
+                        <div class="widget-filter-product-term__item">
+                            <label>
+                                <input class="product_collection_check" type="checkbox" name="<?php echo esc_attr( $shoptheme_term_collection->slug ); ?>" value="<?php echo esc_attr( $shoptheme_term_collection->term_id ); ?>" data-filter="product_collections" />
+
+                                <span>
+                                    <?php echo esc_html( $shoptheme_term_collection->name ); ?>
+                                </span>
+                            </label>
+                        </div>
+
+                    <?php endforeach; ?>
+                </aside>
+
+                <textarea id="txtValue"></textarea>
+            </div>
         </div>
 
     <?php
