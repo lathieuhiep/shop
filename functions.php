@@ -232,6 +232,16 @@ function shoptheme_register_front_end() {
 
     wp_enqueue_script( 'shoptheme-custom', get_theme_file_uri( '/js/custom.js' ), array(), '1.0.0', true );
 
+    if ( class_exists('Woocommerce') ) :
+
+        if ( is_product_category() ) :
+
+            wp_enqueue_script( 'shop-cat', get_theme_file_uri( '/js/shop-cat.js' ), array(), '1.0.0', true );
+
+        endif;
+
+    endif;
+
     /*
    * End Get Js Front End
    * */
