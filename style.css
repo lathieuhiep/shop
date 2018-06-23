@@ -1315,10 +1315,12 @@ aside.widget_rss ul li .rssSummary {
 }
 
 .site-shop__product--item {
+  position: relative;
   background-color: #ffffff;
   padding: 15px;
   border: 1px solid #dddddd;
   height: 100%;
+  overflow: hidden;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -1376,6 +1378,23 @@ aside.widget_rss ul li .rssSummary {
   border: 1px solid #eeeeee;
 }
 
+.woocommerce span.onsale {
+  position: absolute;
+  display: block;
+  top: 10px;
+  left: -45px;
+  right: auto;
+  width: 150px;
+  margin: 0;
+  border-radius: 0;
+  background-color: #ff5555;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
 .woocommerce ul.products {
   margin: 0 -5px;
   text-align: center;
@@ -1391,6 +1410,18 @@ aside.widget_rss ul li .rssSummary {
   flex-flow: row wrap;
 }
 
+.woocommerce ul.products.columns-5 li.product {
+  width: 20%;
+}
+
+.woocommerce ul.products.columns-4 li.product {
+  width: 25%;
+}
+
+.woocommerce ul.products.columns-3 li.product {
+  width: 33.333333%;
+}
+
 .woocommerce ul.products li.first {
   clear: none;
 }
@@ -1399,7 +1430,14 @@ aside.widget_rss ul li .rssSummary {
   float: none;
   margin: 0 0 15px;
   padding: 0 5px;
-  width: 25%;
+}
+
+.woocommerce ul.products li.product .onsale {
+  top: 10px;
+  left: -45px;
+  right: auto;
+  width: 150px;
+  margin: 0;
 }
 
 .woocommerce ul.products li.product .woocommerce-loop-product__title {
@@ -1493,6 +1531,10 @@ aside.widget_rss ul li .rssSummary {
   flex-flow: row wrap;
 }
 
+.woocommerce .site-shop-single .site-shop-single__warp .product_title {
+  font-size: 18px;
+}
+
 .woocommerce .site-shop-single div.product .site-shop-single__gallery-box {
   width: 50%;
   padding: 0 15px;
@@ -1503,6 +1545,11 @@ aside.widget_rss ul li .rssSummary {
   float: none;
   width: 100%;
   margin: 0;
+}
+
+.woocommerce .site-shop-single div.product div.images > figure {
+  position: relative;
+  overflow: hidden;
 }
 
 .woocommerce .site-shop-single div.product div.summary {

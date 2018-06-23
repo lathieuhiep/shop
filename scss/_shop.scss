@@ -10,10 +10,12 @@
 
 }
 .site-shop__product--item {
+  position: relative;
   background-color: #ffffff;
   padding: 15px;
   border: 1px solid #dddddd;
   height: 100%;
+  overflow: hidden;
   @include flexbox();
   @include align-items(center);
   @include flex-direction(column);
@@ -49,6 +51,20 @@
     padding: 5px 10px;
     border: 1px solid $border-color;
   }
+  span {
+    &.onsale {
+      position: absolute;
+      display: block;
+      top: 10px;
+      left: -45px;
+      right: auto;
+      width: 150px;
+      margin: 0;
+      border-radius: 0;
+      background-color: #ff5555;
+      @include transform(rotate(-45deg));
+    }
+  }
   ul {
     &.products {
       margin: 0 -5px;
@@ -56,6 +72,27 @@
       @include flexbox();
       @include flex-flow(row wrap);
 
+      &.columns-5 {
+        li {
+          &.product {
+            width: 20%;
+          }
+        }
+      }
+      &.columns-4 {
+        li {
+          &.product {
+            width: 25%;
+          }
+        }
+      }
+      &.columns-3 {
+        li {
+          &.product {
+            width: 33.333333%;
+          }
+        }
+      }
       li {
         &.first {
           clear: none;
@@ -64,8 +101,14 @@
           float: none;
           margin: 0 0 15px;
           padding: 0 5px;
-          width: 25%;
 
+          .onsale {
+            top: 10px;
+            left: -45px;
+            right: auto;
+            width: 150px;
+            margin: 0;
+          }
           .woocommerce-loop-product__title {
             font-size: 14px;
             margin: 0;
@@ -147,6 +190,10 @@
       margin: 0 -15px 30px;
       @include flexbox();
       @include flex-flow(row wrap);
+
+      .product_title {
+        font-size: 18px;
+      }
     }
     div {
       &.product {
@@ -160,6 +207,11 @@
             float: none;
             width: 100%;
             margin: 0;
+
+            > figure {
+              position: relative;
+              overflow: hidden;
+            }
           }
           &.summary {
             float: none;
