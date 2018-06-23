@@ -140,6 +140,38 @@ if ( ! function_exists( 'shoptheme_woo_before_shop_loop_close' ) ) :
 
 endif;
 
+if ( ! function_exists( 'shoptheme_woo_before_shop_loop_product' ) ) :
+    /**
+     * Hook: woocommerce_before_shop_loop.
+     *
+     * @hooked shoptheme_woo_before_shop_loop_product - 35
+     */
+
+    function shoptheme_woo_before_shop_loop_product() {
+?>
+
+        <div class="site-shop__product">
+
+<?php
+    }
+endif;
+
+if ( ! function_exists( 'shoptheme_woo_after_shop_loop_product' ) ) :
+    /**
+     * Hook: woocommerce_after_shop_loop.
+     *
+     * @hooked shoptheme_woo_after_shop_loop_product - 15
+     */
+
+    function shoptheme_woo_after_shop_loop_product() {
+?>
+
+        </div><!-- .site-shop__product -->
+
+<?php
+    }
+endif;
+
 if ( ! function_exists( 'shoptheme_woo_before_shop_loop_item' ) ) :
     /**
      * Hook: woocommerce_before_shop_loop_item.
