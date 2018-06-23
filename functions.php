@@ -104,6 +104,7 @@ if ( class_exists('Woocommerce') ) :
      */
     require get_parent_theme_file_path( '/extension/woocommerce/hooks.php' );
     require get_parent_theme_file_path( '/extension/woocommerce/functions.php' );
+    require get_parent_theme_file_path( '/extension/woocommerce/woo-taxonomy.php' );
 
 endif;
 
