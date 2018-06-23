@@ -11,7 +11,8 @@
     $( '.product_vendor_check, .product_collection_check' ).on( 'click', function () {
 
         let vendors     = [],
-            collections = [];
+            collections = [],
+            $abc = $( '.woocommerce ul.products' );
 
         $.each( $('input[data-filter="product_vendor"]:checked'), function () {
 
@@ -25,7 +26,42 @@
 
         });
 
-        $('#txtValue').val(vendors + collections)
+        $('#txtValue').val(vendors + collections);
+
+        $.ajax({
+
+            url: load_product_cat.url,
+            type: 'POST',
+            data: ({
+
+                action: 'shoptheme_filter_product_cat',
+                shoptheme_vendor_ids: vendors,
+                shoptheme_collection_ids: collections
+
+            }),
+
+            beforeSend: function () {
+
+            },
+
+            success: function( data ){
+
+                if ( data ){
+
+                    $abc.append(data);
+
+                }
+
+                setTimeout( function() {
+
+
+
+                }, 800 );
+
+            }
+
+        });
+
 
     } )
 
