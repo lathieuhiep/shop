@@ -239,6 +239,10 @@ function shoptheme_register_front_end() {
 
             wp_enqueue_script( 'shop-cat', get_theme_file_uri( '/js/shop-cat.js' ), array(), '1.0.0', true );
 
+            $hoptheme_woo_cat_admin_url =   admin_url( 'admin-ajax.php' );
+            $shoptheme_woo_cat_ajax     =   array( 'url' => $hoptheme_woo_cat_admin_url );
+            wp_localize_script( 'shop-cat', 'load_product_cat', $shoptheme_woo_cat_ajax );
+
         endif;
 
     endif;
