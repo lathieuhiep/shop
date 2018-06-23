@@ -19,12 +19,26 @@ function shoptheme_shoptheme_setup() {
 add_filter('loop_shop_per_page', 'shoptheme_show_products_per_page');
 
 function shoptheme_show_products_per_page() {
+    global $shoptheme_options;
 
-    $shoptheme_product_limit = 12;
+    $shoptheme_product_limit = $shoptheme_options['shoptheme_product_limit'];
+
     return $shoptheme_product_limit;
 
 }
 /* End limit product */
+
+/* Start Change number or products per row */
+add_filter('loop_shop_columns', 'shoptheme_loop_columns_product');
+
+function shoptheme_loop_columns_product() {
+    global $shoptheme_options;
+
+    $shoptheme_products_per_row = $shoptheme_options['shoptheme_products_per_row'];
+
+    return $shoptheme_products_per_row;
+}
+/* End Change number or products per row */
 
 /*
 * Lay Out woo

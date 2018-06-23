@@ -426,6 +426,40 @@ Redux::setSection( $shoptheme_opt_name, array(
 ));
 /* End Social Network */
 
+/* Start Shop */
+Redux::setSection( $shoptheme_opt_name, array(
+    'title'             =>  esc_html__( 'Shop', 'shoptheme' ),
+    'id'                =>  'shoptheme_shop_woo',
+    'desc'              =>  esc_html__( 'Settings WooCommerce', 'shoptheme' ),
+    'customizer_width'  =>  '400px',
+    'icon'              =>  'el el-shopping-cart',
+    'fields'            =>  array(
+        array(
+            'id'            =>  'shoptheme_product_limit',
+            'type'          =>  'slider',
+            'title'         =>  esc_html__( 'Product Limit Page Shop', 'shoptheme' ),
+            'min'           =>  1,
+            'step'          =>  1,
+            'max'           =>  250,
+            'default'       =>  12,
+            'display_value' => 'text'
+        ),
+
+        array(
+            'id'        =>  'shoptheme_products_per_row',
+            'type'      =>  'select',
+            'title'     =>  esc_html__( 'Products Per Row', 'shoptheme' ),
+            'default'   =>  4,
+            'options'   =>  array(
+                3   =>  '3 Column',
+                4   =>  '4 Column',
+                5   =>  '5 Column',
+            )
+        ),
+    )
+));
+/* End Shop */
+
 /* Start Typography Options */
 Redux::setSection( $shoptheme_opt_name, array(
     'title'             =>  esc_html__( 'Typography', 'shoptheme' ),
