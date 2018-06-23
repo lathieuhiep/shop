@@ -314,3 +314,23 @@
 .owl-carousel .owl-stage-outer {
     height: auto !important;
 }
+
+/* term woocommerce */
+.form-field__box,
+.form-field__edit-cat {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: wrap;
+}
+.form-field__box .form-field__item,
+.form-field__edit-cat .form-field__item {
+    -webkit-flex: 0 0 25%;
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+    margin-bottom: 5px;
+}
