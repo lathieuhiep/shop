@@ -97,17 +97,19 @@ function shoptheme_product_cat_add_new_meta_field() {
                 <?php esc_html_e( 'Collections', 'shoptheme' ); ?>
             </label>
 
-            <?php foreach ( $shoptheme_get_product_collections as $shoptheme_product_collections_item ): ?>
+            <div class="form-field__box">
+                <?php foreach ( $shoptheme_get_product_collections as $shoptheme_product_collections_item ): ?>
 
-                <div class="form-field__item">
-                    <label for="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>">
-                        <input type="checkbox" name="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>" value="<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>">
+                    <div class="form-field__item">
+                        <label for="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>">
+                            <input type="checkbox" name="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>" value="<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>">
 
-                        <?php echo esc_html( $shoptheme_product_collections_item->name ) . '&nbsp;' . '('. esc_html( $shoptheme_product_collections_item->count ) . ')'; ?>
-                    </label>
-                </div>
+                            <?php echo esc_html( $shoptheme_product_collections_item->name ) . '&nbsp;' . '('. esc_html( $shoptheme_product_collections_item->count ) . ')'; ?>
+                        </label>
+                    </div>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
 
     <?php
@@ -121,17 +123,19 @@ function shoptheme_product_cat_add_new_meta_field() {
                 <?php esc_html_e( 'Vendor', 'shoptheme' ); ?>
             </label>
 
-            <?php foreach ( $shoptheme_get_product_vendor as $shoptheme_get_product_vendor_item ): ?>
+            <div class="form-field__box">
+                <?php foreach ( $shoptheme_get_product_vendor as $shoptheme_get_product_vendor_item ): ?>
 
-                <div class="form-field__item">
-                    <label for="term-vendor-<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>">
-                        <input type="checkbox" name="term-vendor-<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>" value="<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>">
+                    <div class="form-field__item">
+                        <label for="term-vendor-<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>">
+                            <input type="checkbox" name="term-vendor-<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>" value="<?php echo esc_attr( $shoptheme_get_product_vendor_item->term_id ); ?>">
 
-                        <?php echo esc_html( $shoptheme_get_product_vendor_item->name ) . '&nbsp;' . '('. esc_html( $shoptheme_get_product_vendor_item->count ) . ')'; ?>
-                    </label>
-                </div>
+                            <?php echo esc_html( $shoptheme_get_product_vendor_item->name ) . '&nbsp;' . '('. esc_html( $shoptheme_get_product_vendor_item->count ) . ')'; ?>
+                        </label>
+                    </div>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
 
     <?php
@@ -155,14 +159,13 @@ function shoptheme_product_cat_edit_meta_field( $shoptheme_product_term ) {
         </th>
 
         <td>
-            <div class="form-field">
-
+            <div class="form-field form-field__edit-cat">
                 <?php
                 foreach ( $shoptheme_get_product_collections as $shoptheme_product_collections_item ):
 
                     $shoptheme_check_product_collections = get_term_meta( $shoptheme_product_term->term_id, 'term-collections-'. $shoptheme_product_collections_item->term_id, true );
 
-                    ?>
+                ?>
 
                     <div class="form-field__item">
                         <label for="term-collections-<?php echo esc_attr( $shoptheme_product_collections_item->term_id ); ?>">
@@ -173,7 +176,6 @@ function shoptheme_product_cat_edit_meta_field( $shoptheme_product_term ) {
                     </div>
 
                 <?php endforeach; ?>
-
             </div>
         </td>
     </tr>
@@ -186,7 +188,7 @@ function shoptheme_product_cat_edit_meta_field( $shoptheme_product_term ) {
         </th>
 
         <td>
-            <div class="form-field">
+            <div class="form-field form-field__edit-cat">
 
                 <?php
                 foreach ( $shoptheme_get_product_vendor as $shoptheme_get_product_vendor_item ):
