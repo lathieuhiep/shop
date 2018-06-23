@@ -326,11 +326,25 @@
     flex-wrap: nowrap;
     -webkit-flex-wrap: wrap;
 }
-.form-field__box .form-field__item,
+.form-field__box .form-field__item {
+    -webkit-flex: 0 0 50%;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 33.333333%;
+}
 .form-field__edit-cat .form-field__item {
     -webkit-flex: 0 0 25%;
     -ms-flex: 0 0 25%;
     flex: 0 0 25%;
     max-width: 25%;
     margin-bottom: 5px;
+}
+
+/* Responsive */
+@media ( max-width: 1200px ) {
+
+    .form-field__box .form-field__item label {
+        font-size: 13px;
+    }
+
 }
