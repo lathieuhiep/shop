@@ -346,3 +346,18 @@ if ( !function_exists( 'shoptheme_woo_get_product_cat_filter' ) ) :
     }
 
 endif;
+
+/*
+* Start ajax filter product cat
+*/
+add_action( 'wp_ajax_nopriv_shoptheme_filter_product_cat', 'shoptheme_filter_product_cat' );
+add_action( 'wp_ajax_shoptheme_filter_product_cat', 'shoptheme_filter_product_cat' );
+
+function shoptheme_filter_product_cat() {
+
+    $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
+    $shoptheme_collection_ids   =   $_POST['shoptheme_collection_ids'];
+
+    var_dump( $shoptheme_vendor_ids );echo '+'; var_dump( $shoptheme_collection_ids );
+
+}
