@@ -358,6 +358,4 @@ function shoptheme_filter_product_cat() {
     $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
     $shoptheme_collection_ids   =   $_POST['shoptheme_collection_ids'];
 
-    var_dump( $shoptheme_vendor_ids );echo '+'; var_dump( $shoptheme_collection_ids );
-
 }
