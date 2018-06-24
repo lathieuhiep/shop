@@ -358,4 +358,38 @@ function shoptheme_filter_product_cat() {
     $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
     $shoptheme_collection_ids   =   $_POST['shoptheme_collection_ids'];
 
+    $shoptheme_filter_product_args  =   array(
+        'post_type'         =>  'product',
+        'posts_per_page'    =>  12,
+        'tax_query'         =>  array(
+
+            'relation' => 'AND',
+
+            array(
+                'taxonomy'  =>  'product_vendor',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_vendor_ids
+            ),
+
+            array(
+                'taxonomy'  =>  'product_collections',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_collection_ids
+            ),
+        )
+    );
+    $shoptheme_filter_product_query =   new WP_Query( $shoptheme_filter_product_args );
+
+    woocommerce_product_loop_start();
+
+    while ( $shoptheme_filter_product_query->have_posts() ):
+        $shoptheme_filter_product_query->the_post();
+        do_action( 'woocommerce_shop_loop' );
+
+        wc_get_template_part( 'content', 'product' );
+    endwhile;
+
+    woocommerce_product_loop_end();
+    exit();
+
 }
