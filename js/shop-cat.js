@@ -8,6 +8,8 @@
 
     "use strict";
 
+    let product_cat_id = $( '.sidebar-filter-shop' ).data( 'product-cat' );
+
     $( '.product_vendor_check, .product_collection_check' ).on( 'click', function () {
 
         let vendors             =   [],
@@ -26,8 +28,6 @@
 
         });
 
-        $('#txtValue').val(vendors + collections);
-
         $.ajax({
 
             url: load_product_cat.url,
@@ -35,6 +35,7 @@
             data: ({
 
                 action: 'shoptheme_filter_product_cat',
+                shoptheme_product_cat_id: product_cat_id,
                 shoptheme_vendor_ids: vendors,
                 shoptheme_collection_ids: collections
 
