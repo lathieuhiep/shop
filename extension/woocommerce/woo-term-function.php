@@ -288,7 +288,7 @@ if ( !function_exists( 'shoptheme_woo_get_product_cat_filter' ) ) :
         ?>
 
         <div class="col-md-3">
-            <div class="sidebar-filter-shop">
+            <div class="sidebar-filter-shop" data-product-cat="<?php echo esc_attr( $shoptheme_get_product_cat_id ); ?>">
                 <!-- Vendor -->
                 <aside class="widget widget-filter-product-term">
                     <h2 class="widget-title">
@@ -336,8 +336,6 @@ if ( !function_exists( 'shoptheme_woo_get_product_cat_filter' ) ) :
 
                     <?php endforeach; ?>
                 </aside>
-
-                <textarea id="txtValue"></textarea>
             </div>
         </div>
 
@@ -355,14 +353,24 @@ add_action( 'wp_ajax_shoptheme_filter_product_cat', 'shoptheme_filter_product_ca
 
 function shoptheme_filter_product_cat() {
 
+    $shoptheme_product_cat_id   =   $_POST['shoptheme_product_cat_id'];
     $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
     $shoptheme_collection_ids   =   $_POST['shoptheme_collection_ids'];
 
-    $shoptheme_filter_product_args  =   array(
-        'post_type'         =>  'product',
-        'posts_per_page'    =>  12,
-        'tax_query'         =>  array(
+    $shoptheme_product_wc_query        =   new WC_Query();
+    $shoptheme_product_ordering        =   $shoptheme_product_wc_query -> get_catalog_ordering_args();
 
+    $shoptheme_product_orderby         =   $shoptheme_product_ordering['orderby'];
+    $shoptheme_product_order           =   $shoptheme_product_ordering['order'] ;
+    $shoptheme_product_order_meta_key  =   '';
+
+    if ( isset( $shoptheme_product_ordering['meta_key'] ) ) {
+        $shoptheme_product_order_meta_key  =   $shoptheme_product_ordering['meta_key'];
+    }
+
+    if ( !empty( $shoptheme_vendor_ids ) && !empty( $shoptheme_collection_ids ) ) :
+
+        $shoptheme_filter_tax_query =   array(
             'relation' => 'AND',
 
             array(
@@ -376,8 +384,56 @@ function shoptheme_filter_product_cat() {
                 'field'     =>  'id',
                 'terms'     =>  $shoptheme_collection_ids
             ),
-        )
+
+        );
+
+    elseif ( !empty( $shoptheme_vendor_ids ) && empty( $shoptheme_collection_ids ) ):
+
+        $shoptheme_filter_tax_query =   array(
+
+            array(
+                'taxonomy'  =>  'product_vendor',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_vendor_ids
+            ),
+
+        );
+
+    elseif( empty( $shoptheme_vendor_ids ) && !empty( $shoptheme_collection_ids ) ):
+
+        $shoptheme_filter_tax_query =   array(
+
+            array(
+                'taxonomy'  =>  'product_collections',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_collection_ids
+            ),
+
+        );
+
+    else:
+
+        $shoptheme_filter_tax_query =   array(
+
+            array(
+                'taxonomy'  =>  'product_cat',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_product_cat_id
+            ),
+
+        );
+
+    endif;
+
+    $shoptheme_filter_product_args  =   array(
+        'post_type'         =>  'product',
+        'posts_per_page'    =>  12,
+        'orderby'           =>  $shoptheme_product_orderby,
+        'order'             =>  $shoptheme_product_order,
+        'meta_key'          =>  $shoptheme_product_order_meta_key,
+        'tax_query'         =>  $shoptheme_filter_tax_query
     );
+
     $shoptheme_filter_product_query =   new WP_Query( $shoptheme_filter_product_args );
 
     woocommerce_product_loop_start();
