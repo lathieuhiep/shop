@@ -1346,6 +1346,56 @@ aside.widget_rss ul li .rssSummary {
   padding: 0 15px 15px 15px;
 }
 
+.product-opacity {
+  opacity: 0.4;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.popIn {
+  -webkit-animation: popIn .5s;
+  -moz-animation: popIn .5s;
+  -o-animation: popIn .5s;
+  animation: popIn .5s;
+}
+
+@-webkit-keyframes popIn {
+  from {
+    -webkit-transform: scale(0.85);
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes popIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-o-keyframes popIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .woocommerce .site-post-item {
   border-bottom: none;
 }
@@ -1356,11 +1406,12 @@ aside.widget_rss ul li .rssSummary {
 }
 
 .woocommerce .woocommerce-products-header {
-  padding: 0 15px 15px 15px;
+  padding: 15px;
 }
 
 .woocommerce .woocommerce-products-header .woocommerce-products-header__title {
   margin: 0;
+  font-size: 18px;
 }
 
 .woocommerce .woocommerce-result-count {
