@@ -19,7 +19,7 @@ function shoptheme_shoptheme_setup() {
 add_filter('loop_shop_per_page', 'shoptheme_show_products_per_page');
 
 function shoptheme_show_products_per_page() {
-    global $shoptheme_options;
+    global $shoptheme_options, $shoptheme_product_limit;
 
     $shoptheme_product_limit = $shoptheme_options['shoptheme_product_limit'];
 
@@ -200,6 +200,30 @@ if ( ! function_exists( 'shoptheme_woo_after_shop_loop_item' ) ) :
 
 <?php
     }
+endif;
+
+if ( ! function_exists( 'shoptheme_woo_pagination_ajax' ) ) :
+    /**
+     * Hook: woocommerce_after_shop_loop.
+     *
+     * @hooked shoptheme_woo_pagination_ajax - 10
+     */
+
+    function shoptheme_woo_pagination_ajax() {
+        global $shoptheme_product_limit;
+
+//        var_dump(wc_get_loop_prop( 'total_pages' ));
+?>
+
+        <div class="site-shop__pagination">
+            <button class="btn-global btn-load-product" data-pagination="2" data-limit-product="<?php echo esc_attr( $shoptheme_product_limit ); ?>">
+                Load More
+            </button>
+        </div>
+
+<?php
+    }
+
 endif;
 
 /*

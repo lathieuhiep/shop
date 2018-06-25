@@ -235,7 +235,7 @@ function shoptheme_register_front_end() {
 
     if ( class_exists('Woocommerce') ) :
 
-        if ( is_product_category() ) :
+        if ( is_shop() || is_product_category() ) :
 
             wp_enqueue_script( 'shop-cat', get_theme_file_uri( '/js/shop-cat.js' ), array(), '1.0.0', true );
 

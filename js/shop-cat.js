@@ -64,6 +64,21 @@
         });
 
 
-    } )
+    } );
+
+    $( '.woocommerce-pagination ul li a' ).on( 'click', function ( event  ) {
+
+        // event.preventDefault();
+        let page = set_page( $(this).clone() );
+        // alert(page);
+
+    } );
+
+    function set_page( element ) {
+
+        element.find('span').remove();
+        return parseInt( element.html() );
+
+    }
 
 } )( jQuery );
