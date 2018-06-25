@@ -8,13 +8,13 @@
 
     "use strict";
 
-    let product_cat_id = $( '.sidebar-filter-shop' ).data( 'product-cat' );
+    let product_cat_id      =   $( '.sidebar-filter-shop' ).data( 'product-cat' ),
+        site_shop_product   =   $( '.site-shop__product' );
 
     $( '.product_vendor_check, .product_collection_check' ).on( 'click', function () {
 
-        let vendors             =   [],
-            collections         =   [],
-            site_shop_product   =   $( '.site-shop__product' );
+        let vendors     =   [],
+            collections =   [];
 
         $.each( $('input[data-filter="product_vendor"]:checked'), function () {
 
@@ -42,20 +42,20 @@
             }),
 
             beforeSend: function () {
-
+                site_shop_product.find( 'ul.products' ).addClass( 'product-opacity' );
             },
 
             success: function( data ){
 
                 if ( data ){
 
-                    site_shop_product.empty().append(data);
+                    site_shop_product.empty().append(data).find( 'ul.products li.product' ).addClass( 'popIn' );
 
                 }
 
                 setTimeout( function() {
 
-
+                    site_shop_product.find( 'ul.products li.product' ).removeClass( 'popIn' );
 
                 }, 800 );
 
