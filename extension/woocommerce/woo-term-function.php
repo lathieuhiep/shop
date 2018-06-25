@@ -353,6 +353,8 @@ add_action( 'wp_ajax_shoptheme_filter_product_cat', 'shoptheme_filter_product_ca
 
 function shoptheme_filter_product_cat() {
 
+    global $shoptheme_options;
+
     $shoptheme_product_cat_id   =   $_POST['shoptheme_product_cat_id'];
     $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
     $shoptheme_collection_ids   =   $_POST['shoptheme_collection_ids'];
@@ -427,7 +429,7 @@ function shoptheme_filter_product_cat() {
 
     $shoptheme_filter_product_args  =   array(
         'post_type'         =>  'product',
-        'posts_per_page'    =>  12,
+        'posts_per_page'    =>  -1,
         'orderby'           =>  $shoptheme_product_orderby,
         'order'             =>  $shoptheme_product_order,
         'meta_key'          =>  $shoptheme_product_order_meta_key,
@@ -436,16 +438,23 @@ function shoptheme_filter_product_cat() {
 
     $shoptheme_filter_product_query =   new WP_Query( $shoptheme_filter_product_args );
 
-    woocommerce_product_loop_start();
+    if ( $shoptheme_filter_product_query->have_posts() ) :
 
-    while ( $shoptheme_filter_product_query->have_posts() ):
-        $shoptheme_filter_product_query->the_post();
-        do_action( 'woocommerce_shop_loop' );
+        woocommerce_product_loop_start();
 
-        wc_get_template_part( 'content', 'product' );
-    endwhile;
+            while ( $shoptheme_filter_product_query->have_posts() ):
+                $shoptheme_filter_product_query->the_post();
+                do_action( 'woocommerce_shop_loop' );
 
-    woocommerce_product_loop_end();
+                wc_get_template_part( 'content', 'product' );
+            endwhile;
+
+        woocommerce_product_loop_end();
+
+    else:
+        do_action( 'woocommerce_no_products_found' );
+    endif;
+
     exit();
 
 }
