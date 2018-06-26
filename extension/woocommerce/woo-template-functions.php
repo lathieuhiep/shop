@@ -212,16 +212,22 @@ if ( ! function_exists( 'shoptheme_woo_pagination_ajax' ) ) :
     function shoptheme_woo_pagination_ajax() {
         global $shoptheme_product_limit;
 
-//        var_dump(wc_get_loop_prop( 'total_pages' ));
+        $shoptheme_woo_total_pages      =   wc_get_loop_prop( 'total_pages' );
+
+        if ( $shoptheme_woo_total_pages > 1 ) :
+
+            $shoptheme_woo_total_product            =   wc_get_loop_prop( 'total' );
+            $shoptheme_woo_total_product_remaining  =   $shoptheme_woo_total_product - $shoptheme_product_limit;
 ?>
 
         <div class="site-shop__pagination">
             <button class="btn-global btn-load-product" data-pagination="2" data-limit-product="<?php echo esc_attr( $shoptheme_product_limit ); ?>">
-                Load More
+                <?php esc_html_e( 'See more', 'shoptheme' ); echo ' ' . esc_html( $shoptheme_woo_total_product_remaining ) . ' '; esc_html_e( 'products', 'shoptheme' );  ?>
             </button>
         </div>
 
 <?php
+        endif;
     }
 
 endif;
@@ -355,3 +361,45 @@ if ( ! function_exists( 'shoptheme_woo_before_single_product_summary_close' ) ) 
     }
 
 endif;
+
+/*
+* Start pagination ajax
+*/
+add_action( 'wp_ajax_nopriv_shoptheme_pagination_product', 'shoptheme_pagination_product' );
+add_action( 'wp_ajax_shoptheme_pagination_product', 'shoptheme_pagination_product' );
+
+function shoptheme_pagination_product() {
+
+    $shoptheme_page_shop   =   $_POST['shoptheme_page_shop'];
+    $shoptheme_limit_product   =   $_POST['shoptheme_limit_product'];
+
+    $shoptheme_product_wc_query        =   new WC_Query();
+    $shoptheme_product_ordering        =   $shoptheme_product_wc_query -> get_catalog_ordering_args();
+    $shoptheme_product_orderby         =   $shoptheme_product_ordering['orderby'];
+    $shoptheme_product_order           =   $shoptheme_product_ordering['order'] ;
+    $shoptheme_product_order_meta_key  =   '';
+
+    if ( isset( $shoptheme_product_ordering['meta_key'] ) ) {
+        $shoptheme_product_order_meta_key  =   $shoptheme_product_ordering['meta_key'];
+    }
+
+    $shoptheme_load_product_args  =   array(
+        'post_type'         =>  'product',
+        'paged'             =>  $shoptheme_page_shop,
+        'posts_per_page'    =>  $shoptheme_limit_product,
+        'orderby'           =>  $shoptheme_product_orderby,
+        'order'             =>  $shoptheme_product_order,
+        'meta_key'          =>  $shoptheme_product_order_meta_key,
+    );
+
+    $shoptheme_load_product_query =   new WP_Query( $shoptheme_load_product_args );
+
+    while ( $shoptheme_load_product_query->have_posts() ):
+        $shoptheme_load_product_query->the_post();
+        do_action( 'woocommerce_shop_loop' );
+
+        wc_get_template_part( 'content', 'product' );
+    endwhile;
+    exit();
+
+}

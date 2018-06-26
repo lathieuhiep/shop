@@ -66,19 +66,46 @@
 
     } );
 
-    $( '.woocommerce-pagination ul li a' ).on( 'click', function ( event  ) {
+    $( '.btn-load-product' ).on( 'click', function () {
 
-        // event.preventDefault();
-        let page = set_page( $(this).clone() );
-        // alert(page);
+        let pagination_product  =   $(this).data( 'pagination' ),
+            limit_product       =   $(this).data( 'limit-product' );
+
+        $.ajax({
+
+            url: load_product_cat.url,
+            type: 'POST',
+            data: ({
+
+                action: 'shoptheme_pagination_product',
+                shoptheme_page_shop: pagination_product,
+                shoptheme_limit_product: limit_product
+
+            }),
+
+            beforeSend: function () {
+
+            },
+
+            success: function( data ){
+
+                if ( data ){
+
+                    $( '.site-shop__product ul.products' ).append(data).find( 'li.product' );
+                    $( '.btn-load-product' ).data( 'pagination', pagination_product + 1 );
+
+                }
+
+                setTimeout( function() {
+
+
+
+                }, 800 );
+
+            }
+
+        });
 
     } );
-
-    function set_page( element ) {
-
-        element.find('span').remove();
-        return parseInt( element.html() );
-
-    }
 
 } )( jQuery );
