@@ -35,11 +35,6 @@
   -o-animation:      popIn .5s;
   animation:         popIn .5s;
 }
-//@keyframes popIn {
-//  from {transform: scale(0.85); opacity: 0;}
-//  to {transform: scale(1); opacity: 1;}
-//}
-
 @-webkit-keyframes popIn {
   from {transform: scale(0.85); opacity: 0;}
   to {transform: scale(1); opacity: 1;}
@@ -255,4 +250,47 @@
 }
 .pswp__bg {
   background-color: rgba(0, 0, 0, 0.9);
+}
+.site-shop__pagination {
+  margin-top: 20px;
+  position: relative;
+
+  button {
+    padding: 10px 15px;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: capitalize;
+    background-color: #ff5555;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    @include border-radius(5px);
+  }
+}
+.loader-hide {
+  opacity: 0;
+}
+.loader-ajax {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  margin-left: -15px;
+  border: 3px solid #ff5555;
+  border-radius: 50%;
+  border-top: 3px solid #ffffff;
+  width: 25px;
+  height: 25px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
