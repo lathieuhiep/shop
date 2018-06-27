@@ -68,8 +68,10 @@
 
     $( '.btn-load-product' ).on( 'click', function () {
 
-        let pagination_product  =   $(this).data( 'pagination' ),
-            limit_product       =   $(this).data( 'limit-product' );
+        let site_shop_pagination    =   $( '.site-shop__pagination' ),
+            pagination_product      =   parseInt( $(this).data( 'pagination' ) ),
+            limit_product           =   parseInt( $(this).data( 'limit-product' ) ),
+            remaining_product       =   parseInt( $(this).data( 'remaining-product' ) );
 
         $.ajax({
 
@@ -84,21 +86,34 @@
             }),
 
             beforeSend: function () {
-
+                site_shop_pagination.find( '.loader-ajax').removeClass( 'loader-hide' );
             },
 
-            success: function( data ){
+            success: function( data ) {
 
-                if ( data ){
+                if ( data ) {
 
-                    $( '.site-shop__product ul.products' ).append(data).find( 'li.product' );
-                    $( '.btn-load-product' ).data( 'pagination', pagination_product + 1 );
+                    let btn_load_product        =   $( '.btn-load-product' ),
+                        pagination_product_plus =   pagination_product + 1,
+                        total_remaining_product =   remaining_product - limit_product;
+
+                    site_shop_pagination.find( '.loader-ajax').addClass( 'loader-hide' );
+
+                    $( '.site-shop__product ul.products' ).append(data);
+
+                    btn_load_product.data( 'pagination', pagination_product_plus );
+
+                    if ( total_remaining_product > 0 ) {
+                        btn_load_product.data( 'remaining-product', total_remaining_product ).find( '.total-product-remaining' ).empty().append( '(' + total_remaining_product + ')' );
+                    }else {
+                        site_shop_pagination.remove();
+                    }
 
                 }
 
                 setTimeout( function() {
 
-
+                    site_shop_product.find( 'ul.products li.product' ).removeClass( 'popIn' );
 
                 }, 800 );
 

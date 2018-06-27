@@ -214,15 +214,23 @@ if ( ! function_exists( 'shoptheme_woo_pagination_ajax' ) ) :
 
         $shoptheme_woo_total_pages      =   wc_get_loop_prop( 'total_pages' );
 
+//        var_dump($_GET['orderby']);
+
         if ( $shoptheme_woo_total_pages > 1 ) :
 
             $shoptheme_woo_total_product            =   wc_get_loop_prop( 'total' );
             $shoptheme_woo_total_product_remaining  =   $shoptheme_woo_total_product - $shoptheme_product_limit;
 ?>
 
-        <div class="site-shop__pagination">
-            <button class="btn-global btn-load-product" data-pagination="2" data-limit-product="<?php echo esc_attr( $shoptheme_product_limit ); ?>">
-                <?php esc_html_e( 'See more', 'shoptheme' ); echo ' ' . esc_html( $shoptheme_woo_total_product_remaining ) . ' '; esc_html_e( 'products', 'shoptheme' );  ?>
+        <div class="site-shop__pagination text-center">
+            <div class="loader-ajax loader-hide"></div>
+
+            <button class="btn-global btn-load-product" data-pagination="2" data-limit-product="<?php echo esc_attr( $shoptheme_product_limit ); ?>" data-remaining-product="<?php echo esc_attr( $shoptheme_woo_total_product_remaining ); ?>">
+                <?php esc_html_e( 'See more products', 'shoptheme' ); ?>
+
+                <span class="total-product-remaining">
+                    ( <?php echo esc_html( $shoptheme_woo_total_product_remaining ); ?> )
+                </span>
             </button>
         </div>
 
@@ -370,8 +378,10 @@ add_action( 'wp_ajax_shoptheme_pagination_product', 'shoptheme_pagination_produc
 
 function shoptheme_pagination_product() {
 
-    $shoptheme_page_shop   =   $_POST['shoptheme_page_shop'];
-    $shoptheme_limit_product   =   $_POST['shoptheme_limit_product'];
+    $shoptheme_page_shop        =   $_POST['shoptheme_page_shop'];
+    $shoptheme_limit_product    =   $_POST['shoptheme_limit_product'];
+
+
 
     $shoptheme_product_wc_query        =   new WC_Query();
     $shoptheme_product_ordering        =   $shoptheme_product_wc_query -> get_catalog_ordering_args();
@@ -387,7 +397,7 @@ function shoptheme_pagination_product() {
         'post_type'         =>  'product',
         'paged'             =>  $shoptheme_page_shop,
         'posts_per_page'    =>  $shoptheme_limit_product,
-        'orderby'           =>  $shoptheme_product_orderby,
+        'orderby'           =>  'price',
         'order'             =>  $shoptheme_product_order,
         'meta_key'          =>  $shoptheme_product_order_meta_key,
     );
@@ -398,7 +408,51 @@ function shoptheme_pagination_product() {
         $shoptheme_load_product_query->the_post();
         do_action( 'woocommerce_shop_loop' );
 
-        wc_get_template_part( 'content', 'product' );
+?>
+
+        <li <?php wc_product_class( 'popIn' ); ?>>
+            <?php
+            /**
+             * Hook: woocommerce_before_shop_loop_item.
+             *
+             * @hooked woocommerce_template_loop_product_link_open - 10
+             */
+            do_action( 'woocommerce_before_shop_loop_item' );
+
+            /**
+             * Hook: woocommerce_before_shop_loop_item_title.
+             *
+             * @hooked woocommerce_show_product_loop_sale_flash - 10
+             * @hooked woocommerce_template_loop_product_thumbnail - 10
+             */
+            do_action( 'woocommerce_before_shop_loop_item_title' );
+
+            /**
+             * Hook: woocommerce_shop_loop_item_title.
+             *
+             * @hooked woocommerce_template_loop_product_title - 10
+             */
+            do_action( 'woocommerce_shop_loop_item_title' );
+
+            /**
+             * Hook: woocommerce_after_shop_loop_item_title.
+             *
+             * @hooked woocommerce_template_loop_rating - 5
+             * @hooked woocommerce_template_loop_price - 10
+             */
+            do_action( 'woocommerce_after_shop_loop_item_title' );
+
+            /**
+             * Hook: woocommerce_after_shop_loop_item.
+             *
+             * @hooked woocommerce_template_loop_product_link_close - 5
+             * @hooked woocommerce_template_loop_add_to_cart - 10
+             */
+            do_action( 'woocommerce_after_shop_loop_item' );
+            ?>
+        </li>
+
+<?php
     endwhile;
     exit();
 
