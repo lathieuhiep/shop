@@ -353,7 +353,7 @@ add_action( 'wp_ajax_shoptheme_filter_product_cat', 'shoptheme_filter_product_ca
 
 function shoptheme_filter_product_cat() {
 
-    global $shoptheme_options;
+    $shoptheme_product_limit    =   shoptheme_show_products_per_page();
 
     $shoptheme_product_cat_id   =   $_POST['shoptheme_product_cat_id'];
     $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
@@ -365,6 +365,8 @@ function shoptheme_filter_product_cat() {
     $shoptheme_product_orderby         =   $shoptheme_product_ordering['orderby'];
     $shoptheme_product_order           =   $shoptheme_product_ordering['order'] ;
     $shoptheme_product_order_meta_key  =   '';
+
+//    var_dump($shoptheme_vendor_ids);
 
     if ( isset( $shoptheme_product_ordering['meta_key'] ) ) {
         $shoptheme_product_order_meta_key  =   $shoptheme_product_ordering['meta_key'];
@@ -429,7 +431,7 @@ function shoptheme_filter_product_cat() {
 
     $shoptheme_filter_product_args  =   array(
         'post_type'         =>  'product',
-        'posts_per_page'    =>  -1,
+        'posts_per_page'    =>  $shoptheme_product_limit,
         'orderby'           =>  $shoptheme_product_orderby,
         'order'             =>  $shoptheme_product_order,
         'meta_key'          =>  $shoptheme_product_order_meta_key,
@@ -440,17 +442,13 @@ function shoptheme_filter_product_cat() {
 
     if ( $shoptheme_filter_product_query->have_posts() ) :
 
-        woocommerce_product_loop_start();
+        while ( $shoptheme_filter_product_query->have_posts() ):
+            $shoptheme_filter_product_query->the_post();
+            do_action( 'woocommerce_shop_loop' );
 
-            while ( $shoptheme_filter_product_query->have_posts() ):
-                $shoptheme_filter_product_query->the_post();
-                do_action( 'woocommerce_shop_loop' );
-
-                wc_get_template_part( 'content', 'product' );
-            endwhile;
-
-        woocommerce_product_loop_end();
-
+            wc_get_template_part( 'content', 'product' );
+        endwhile;
+        
     else:
         do_action( 'woocommerce_no_products_found' );
     endif;

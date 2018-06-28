@@ -212,9 +212,13 @@ if ( ! function_exists( 'shoptheme_woo_pagination_ajax' ) ) :
     function shoptheme_woo_pagination_ajax() {
         global $shoptheme_product_limit;
 
-        $shoptheme_woo_total_pages      =   wc_get_loop_prop( 'total_pages' );
+        $shoptheme_data_cat_product =   '';
+        $shoptheme_woo_total_pages  =   wc_get_loop_prop( 'total_pages' );
+        $shoptheme_woo_orderby      =   $_GET['orderby'];
 
-//        var_dump($_GET['orderby']);
+        if ( is_product_category() ) :
+            $shoptheme_data_cat_product =   ' data-cat-id='. get_queried_object_id() .'';
+        endif;
 
         if ( $shoptheme_woo_total_pages > 1 ) :
 
@@ -225,7 +229,7 @@ if ( ! function_exists( 'shoptheme_woo_pagination_ajax' ) ) :
         <div class="site-shop__pagination text-center">
             <div class="loader-ajax loader-hide"></div>
 
-            <button class="btn-global btn-load-product" data-pagination="2" data-limit-product="<?php echo esc_attr( $shoptheme_product_limit ); ?>" data-remaining-product="<?php echo esc_attr( $shoptheme_woo_total_product_remaining ); ?>">
+            <button class="btn-global btn-load-product" data-pagination="2" data-orderby="<?php echo esc_attr( $shoptheme_woo_orderby ); ?>" data-limit-product="<?php echo esc_attr( $shoptheme_product_limit ); ?>" data-remaining-product="<?php echo esc_attr( $shoptheme_woo_total_product_remaining ); ?>" <?php echo esc_attr( $shoptheme_data_cat_product ); ?>>
                 <?php esc_html_e( 'See more products', 'shoptheme' ); ?>
 
                 <span class="total-product-remaining">
@@ -379,12 +383,22 @@ add_action( 'wp_ajax_shoptheme_pagination_product', 'shoptheme_pagination_produc
 function shoptheme_pagination_product() {
 
     $shoptheme_page_shop        =   $_POST['shoptheme_page_shop'];
+    $shoptheme_orderby_product  =   $_POST['shoptheme_orderby_product'];
     $shoptheme_limit_product    =   $_POST['shoptheme_limit_product'];
+    $shoptheme_product_cat_id   =   $_POST['shoptheme_product_cat_id'];
 
+    if ( !empty( $shoptheme_orderby_product ) ) :
 
+        $shoptheme_orderby_value = explode( '-', $shoptheme_orderby_product );
+        $shoptheme_orderby       = esc_attr( $shoptheme_orderby_value[0] );
+        $shoptheme_order         = ! empty( $shoptheme_orderby_value[1] ) ? $shoptheme_orderby_value[1] : '';
 
-    $shoptheme_product_wc_query        =   new WC_Query();
-    $shoptheme_product_ordering        =   $shoptheme_product_wc_query -> get_catalog_ordering_args();
+        $shoptheme_product_ordering =   wc()->query->get_catalog_ordering_args( $shoptheme_orderby, $shoptheme_order );
+
+    else:
+        $shoptheme_product_ordering =   wc()->query->get_catalog_ordering_args();
+    endif;
+
     $shoptheme_product_orderby         =   $shoptheme_product_ordering['orderby'];
     $shoptheme_product_order           =   $shoptheme_product_ordering['order'] ;
     $shoptheme_product_order_meta_key  =   '';
@@ -393,14 +407,36 @@ function shoptheme_pagination_product() {
         $shoptheme_product_order_meta_key  =   $shoptheme_product_ordering['meta_key'];
     }
 
-    $shoptheme_load_product_args  =   array(
-        'post_type'         =>  'product',
-        'paged'             =>  $shoptheme_page_shop,
-        'posts_per_page'    =>  $shoptheme_limit_product,
-        'orderby'           =>  'price',
-        'order'             =>  $shoptheme_product_order,
-        'meta_key'          =>  $shoptheme_product_order_meta_key,
-    );
+    if ( !empty( $shoptheme_product_cat_id ) ) :
+
+        $shoptheme_load_product_args  =   array(
+            'post_type'         =>  'product',
+            'paged'             =>  $shoptheme_page_shop,
+            'posts_per_page'    =>  $shoptheme_limit_product,
+            'orderby'           =>  $shoptheme_product_orderby,
+            'order'             =>  $shoptheme_product_order,
+            'meta_key'          =>  $shoptheme_product_order_meta_key,
+            'tax_query'         =>  array(
+                array(
+                    'taxonomy'  =>  'product_cat',
+                    'field'     =>  'id',
+                    'terms'     =>  $shoptheme_product_cat_id
+                ),
+            )
+        );
+
+    else:
+
+        $shoptheme_load_product_args  =   array(
+            'post_type'         =>  'product',
+            'paged'             =>  $shoptheme_page_shop,
+            'posts_per_page'    =>  $shoptheme_limit_product,
+            'orderby'           =>  $shoptheme_product_orderby,
+            'order'             =>  $shoptheme_product_order,
+            'meta_key'          =>  $shoptheme_product_order_meta_key,
+        );
+
+    endif;
 
     $shoptheme_load_product_query =   new WP_Query( $shoptheme_load_product_args );
 

@@ -49,8 +49,8 @@
 
                 if ( data ){
 
-                    site_shop_product.empty().append(data).find( 'ul.products li.product' ).addClass( 'popIn' );
-
+                    site_shop_product.find( 'ul.products' ).empty().append(data).find( 'li.product' ).addClass( 'popIn' );
+                    site_shop_product.find( 'ul.products' ).removeClass( 'product-opacity' );
                 }
 
                 setTimeout( function() {
@@ -70,8 +70,10 @@
 
         let site_shop_pagination    =   $( '.site-shop__pagination' ),
             pagination_product      =   parseInt( $(this).data( 'pagination' ) ),
+            orderby                 =   $(this).data( 'orderby' ),
             limit_product           =   parseInt( $(this).data( 'limit-product' ) ),
-            remaining_product       =   parseInt( $(this).data( 'remaining-product' ) );
+            remaining_product       =   parseInt( $(this).data( 'remaining-product' ) ),
+            product_cat_id          =   parseInt( $(this).data( 'cat-id' ) );
 
         $.ajax({
 
@@ -81,7 +83,9 @@
 
                 action: 'shoptheme_pagination_product',
                 shoptheme_page_shop: pagination_product,
-                shoptheme_limit_product: limit_product
+                shoptheme_orderby_product: orderby,
+                shoptheme_limit_product: limit_product,
+                shoptheme_product_cat_id: product_cat_id
 
             }),
 
@@ -94,19 +98,22 @@
                 if ( data ) {
 
                     let btn_load_product        =   $( '.btn-load-product' ),
-                        pagination_product_plus =   pagination_product + 1,
                         total_remaining_product =   remaining_product - limit_product;
 
                     site_shop_pagination.find( '.loader-ajax').addClass( 'loader-hide' );
 
                     $( '.site-shop__product ul.products' ).append(data);
 
-                    btn_load_product.data( 'pagination', pagination_product_plus );
-
                     if ( total_remaining_product > 0 ) {
-                        btn_load_product.data( 'remaining-product', total_remaining_product ).find( '.total-product-remaining' ).empty().append( '(' + total_remaining_product + ')' );
+
+                        let pagination_product_plus =   pagination_product + 1;
+
+                        btn_load_product.data( {'pagination': pagination_product_plus, 'remaining-product' :total_remaining_product} ).find( '.total-product-remaining' ).empty().append( '(' + total_remaining_product + ')' );
+
                     }else {
+
                         site_shop_pagination.remove();
+
                     }
 
                 }
