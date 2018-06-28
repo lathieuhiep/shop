@@ -151,8 +151,8 @@ function shoptheme_widgets_init() {
             'name'          =>  esc_attr( $shoptheme_widgets_value['name'] ),
             'id'            =>  esc_attr( $shoptheme_widgets_id ),
             'description'   =>  esc_attr( $shoptheme_widgets_value['description'] ),
-            'before_widget' =>  '<aside id="%1$s" class="widget %2$s">',
-            'after_widget'  =>  '</aside>',
+            'before_widget' =>  '<section id="%1$s" class="widget %2$s">',
+            'after_widget'  =>  '</section>',
             'before_title'  =>  '<h2 class="widget-title">',
             'after_title'   =>  '</h2>'
         ));
