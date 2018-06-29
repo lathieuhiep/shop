@@ -123,6 +123,11 @@ function shoptheme_widgets_init() {
             'description'       =>  esc_html__( 'Display sidebar right or left on all page.', 'shoptheme' )
         ),
 
+        'shoptheme-sidebar-wc'     =>  array(
+            'name'              =>  esc_html__( 'Sidebar Woocommerce', 'shoptheme' ),
+            'description'       =>  esc_html__( 'Display sidebar on page shop.', 'shoptheme' )
+        ),
+
         'shoptheme-footer-1'    =>  array(
             'name'              =>  esc_html__( 'Footer 1', 'shoptheme' ),
             'description'       =>  esc_html__('Display footer column 1 on all page.', 'shoptheme' )
