@@ -246,26 +246,8 @@ add_action( 'edited_product_cat', 'shoptheme_taxonomy_custom_meta', 10, 2 );
 add_action( 'create_product_cat', 'shoptheme_taxonomy_custom_meta', 10, 2 );
 /* End create metabox product cat */
 
-/*
-* Start ajax filter product cat
-*/
-add_action( 'wp_ajax_nopriv_shoptheme_filter_product_cat', 'shoptheme_filter_product_cat' );
-add_action( 'wp_ajax_shoptheme_filter_product_cat', 'shoptheme_filter_product_cat' );
-
-function shoptheme_filter_product_cat() {
-
-    $shoptheme_product_limit    =   shoptheme_show_products_per_page();
-
-    $shoptheme_product_cat_id   =   $_POST['shoptheme_product_cat_id'];
-    $shoptheme_orderby_product  =   $_POST['shoptheme_orderby_product'];
-    $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
-    $shoptheme_collection_ids   =   $_POST['shoptheme_collection_ids'];
-
-    $shoptheme_product_ordering =   shoptheme_get_orderby_product( $shoptheme_orderby_product );
-
-    $shoptheme_product_orderby          =   $shoptheme_product_ordering['shoptheme_product_orderby'];
-    $shoptheme_product_order            =   $shoptheme_product_ordering['shoptheme_product_order'];
-    $shoptheme_product_order_meta_key   =   $shoptheme_product_ordering['shoptheme_product_order_meta_key'];
+/* Product filter tax */
+function shoptheme_product_filter_tax( $shoptheme_vendor_ids = '', $shoptheme_collection_ids = '', $shoptheme_product_cat_id = '' ) {
 
     if ( !empty( $shoptheme_vendor_ids ) && !empty( $shoptheme_collection_ids ) ) :
 
@@ -327,6 +309,33 @@ function shoptheme_filter_product_cat() {
         $shoptheme_filter_tax_query =   '';
 
     endif;
+
+    return $shoptheme_filter_tax_query;
+
+}
+
+/*
+* Start ajax filter product cat
+*/
+add_action( 'wp_ajax_nopriv_shoptheme_filter_product_cat', 'shoptheme_filter_product_cat' );
+add_action( 'wp_ajax_shoptheme_filter_product_cat', 'shoptheme_filter_product_cat' );
+
+function shoptheme_filter_product_cat() {
+
+    $shoptheme_product_limit    =   shoptheme_show_products_per_page();
+
+    $shoptheme_product_cat_id   =   $_POST['shoptheme_product_cat_id'];
+    $shoptheme_orderby_product  =   $_POST['shoptheme_orderby_product'];
+    $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
+    $shoptheme_collection_ids   =   $_POST['shoptheme_collection_ids'];
+
+    $shoptheme_product_ordering =   shoptheme_get_orderby_product( $shoptheme_orderby_product );
+
+    $shoptheme_product_orderby          =   $shoptheme_product_ordering['shoptheme_product_orderby'];
+    $shoptheme_product_order            =   $shoptheme_product_ordering['shoptheme_product_order'];
+    $shoptheme_product_order_meta_key   =   $shoptheme_product_ordering['shoptheme_product_order_meta_key'];
+
+    $shoptheme_filter_tax_query         =   shoptheme_product_filter_tax( $shoptheme_vendor_ids, $shoptheme_collection_ids,  $shoptheme_product_cat_id );
 
     $shoptheme_filter_product_args  =   array(
         'post_type'         =>  'product',
