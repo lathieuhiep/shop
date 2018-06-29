@@ -8,7 +8,9 @@
 
     "use strict";
 
-    let product_cat_id      =   $( '.sidebar-filter-shop' ).data( 'product-cat' ),
+    let site_shop           =   $( '.site-shop' ),
+        product_cat_id      =   site_shop.data( 'product-cat' ),
+        orderby             =   site_shop.data( 'orderby' ),
         site_shop_product   =   $( '.site-shop__product' );
 
     $( '.product_vendor_check, .product_collection_check' ).on( 'click', function () {
@@ -36,6 +38,7 @@
 
                 action: 'shoptheme_filter_product_cat',
                 shoptheme_product_cat_id: product_cat_id,
+                shoptheme_orderby_product: orderby,
                 shoptheme_vendor_ids: vendors,
                 shoptheme_collection_ids: collections
 
@@ -70,10 +73,8 @@
 
         let site_shop_pagination    =   $( '.site-shop__pagination' ),
             pagination_product      =   parseInt( $(this).data( 'pagination' ) ),
-            orderby                 =   $(this).data( 'orderby' ),
             limit_product           =   parseInt( $(this).data( 'limit-product' ) ),
-            remaining_product       =   parseInt( $(this).data( 'remaining-product' ) ),
-            product_cat_id          =   parseInt( $(this).data( 'cat-id' ) );
+            remaining_product       =   parseInt( $(this).data( 'remaining-product' ) );
 
         $.ajax({
 

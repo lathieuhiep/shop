@@ -69,7 +69,7 @@ class shoptheme_collection_filter_widget extends WP_Widget {
 
         ?>
 
-        <div class="sidebar-filter-shop" data-product-cat="<?php echo esc_attr( $shoptheme_get_product_cat_id ); ?>">
+        <div class="sidebar-filter-shop">
 
             <?php
 

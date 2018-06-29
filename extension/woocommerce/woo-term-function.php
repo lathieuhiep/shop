@@ -356,18 +356,15 @@ function shoptheme_filter_product_cat() {
     $shoptheme_product_limit    =   shoptheme_show_products_per_page();
 
     $shoptheme_product_cat_id   =   $_POST['shoptheme_product_cat_id'];
+    $shoptheme_orderby_product  =   $_POST['shoptheme_orderby_product'];
     $shoptheme_vendor_ids       =   $_POST['shoptheme_vendor_ids'];
     $shoptheme_collection_ids   =   $_POST['shoptheme_collection_ids'];
 
-    $shoptheme_product_ordering        =   wc()->query->get_catalog_ordering_args();
+    $shoptheme_product_ordering =   shoptheme_get_orderby_product( $shoptheme_orderby_product );
 
-    $shoptheme_product_orderby         =   $shoptheme_product_ordering['orderby'];
-    $shoptheme_product_order           =   $shoptheme_product_ordering['order'] ;
-    $shoptheme_product_order_meta_key  =   '';
-
-    if ( isset( $shoptheme_product_ordering['meta_key'] ) ) {
-        $shoptheme_product_order_meta_key  =   $shoptheme_product_ordering['meta_key'];
-    }
+    $shoptheme_product_orderby          =   $shoptheme_product_ordering['shoptheme_product_orderby'];
+    $shoptheme_product_order            =   $shoptheme_product_ordering['shoptheme_product_order'];
+    $shoptheme_product_order_meta_key   =   $shoptheme_product_ordering['shoptheme_product_order_meta_key'];
 
     if ( !empty( $shoptheme_vendor_ids ) && !empty( $shoptheme_collection_ids ) ) :
 
