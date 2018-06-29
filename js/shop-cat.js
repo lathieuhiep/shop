@@ -49,8 +49,8 @@
 
                 if ( data ){
 
-                    site_shop_product.find( 'ul.products' ).empty().append(data).find( 'li.product' ).addClass( 'popIn' );
-                    site_shop_product.find( 'ul.products' ).removeClass( 'product-opacity' );
+                    site_shop_product.empty().append(data).find( 'li.product' ).addClass( 'popIn' );
+                    // site_shop_product.find( 'ul.products' ).removeClass( 'product-opacity' );
                 }
 
                 setTimeout( function() {
@@ -66,7 +66,7 @@
 
     } );
 
-    $( '.btn-load-product' ).on( 'click', function () {
+    $( 'body' ).on( 'click', '.btn-load-product', function () {
 
         let site_shop_pagination    =   $( '.site-shop__pagination' ),
             pagination_product      =   parseInt( $(this).data( 'pagination' ) ),
