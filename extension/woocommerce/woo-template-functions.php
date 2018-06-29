@@ -40,6 +40,25 @@ function shoptheme_loop_columns_product() {
 }
 /* End Change number or products per row */
 
+/* Start Sidebar Shop */
+if ( ! function_exists( 'shoptheme_woo_get_sidebar' ) ) :
+
+    function shoptheme_woo_get_sidebar() {
+
+         if( is_active_sidebar( 'shoptheme-sidebar-wc' ) ):
+ ?>
+
+            <aside class="col-md-3">
+                <?php dynamic_sidebar( 'shoptheme-sidebar-wc' ); ?>
+            </aside>
+
+<?php
+         endif;
+    }
+
+endif;
+/* End Sidebar Shop */
+
 /*
 * Lay Out woo
 */
@@ -56,13 +75,13 @@ if ( ! function_exists( 'shoptheme_woo_before_main_content' ) ) :
         <div class="site-shop">
             <div class="container">
                 <div class="row">
-                    <?php
-                        if ( is_product_category() ) :
-                            do_action( 'shoptheme_woo_product_cat_filter' );
-                        endif;
-                    ?>
+<!--                    --><?php
+//                        if ( is_product_category() ) :
+//                            do_action( 'shoptheme_woo_product_cat_filter' );
+//                        endif;
+//                    ?>
 
-                    <div class="col-md-9">
+                    <div class="<?php echo is_active_sidebar( 'shoptheme-sidebar-wc' ) ? 'col-md-9' : 'col-md-12'; ?>">
                         <div class="site-shop__box">
 
     <?php
@@ -80,7 +99,7 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
 
     ?>
                         </div>
-                    </div><!-- .col-md-9 -->
+                    </div><!-- .col-md-9 or col-md-12 -->
 
                     <?php
                     /**
@@ -88,9 +107,8 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
                      *
                      * @hooked shoptheme_woo_sidebar - 10
                      */
-                    if ( !is_product_category() ) :
-                        do_action( 'shoptheme_woo_sidebar' );
-                    endif;
+
+                    do_action( 'shoptheme_woo_sidebar' );
 
                     ?>
 
