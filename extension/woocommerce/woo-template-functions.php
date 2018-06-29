@@ -407,7 +407,7 @@ if ( ! function_exists( 'shoptheme_woo_before_single_product_summary_close' ) ) 
 endif;
 
 /* Get value orderby product  */
-function shoptheme_get_orderby_product( $shoptheme_orderby_product_value ) {
+function shoptheme_get_orderby_product( $shoptheme_orderby_product_value = '' ) {
 
     if ( !empty( $shoptheme_orderby_product_value ) ) :
 
