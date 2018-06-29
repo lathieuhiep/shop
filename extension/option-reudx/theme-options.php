@@ -309,7 +309,6 @@ Redux::setSection( $shoptheme_opt_name, array(
             'type'          =>  'text',
             'title'         =>  esc_html__( 'Logo Text', 'shoptheme' ),
             'subtitle'      =>  esc_html__( 'logo name for your website', 'shoptheme' ),
-            'desc'          =>  esc_html__( '', 'shoptheme' ),
             'default'       =>  $shoptheme_theme->get( 'Name' ),
             'placeholder'   =>  $shoptheme_theme->get( 'Name' ),
             'required'      =>  array( 'shoptheme_type_logo', '=', array( 'logo_text' ) )
@@ -454,6 +453,19 @@ Redux::setSection( $shoptheme_opt_name, array(
                 3   =>  '3 Column',
                 4   =>  '4 Column',
                 5   =>  '5 Column',
+            )
+        ),
+
+        array(
+            'id'        =>  'shoptheme_sidebar_woo',
+            'type'      =>  'select',
+            'title'     =>  esc_html__( 'Position Sidebar Woocommerce', 'shoptheme' ),
+            'desc'          =>  esc_html__( 'Position Sidebar Woocommerce', 'shoptheme' ),
+            'default'   =>  'left',
+            'options'   =>  array(
+                'left'  =>  'Left',
+                'right' =>  'Right',
+                'hide'  =>  'Hide',
             )
         ),
     )
