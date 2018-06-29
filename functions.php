@@ -99,6 +99,13 @@ if ( ! function_exists( '_is_elementor_installed' ) ) :
 endif;
 
 if ( class_exists('Woocommerce') ) :
+
+    /*
+     * Required: widgets
+     */
+    require get_parent_theme_file_path( '/extension/widgets/collection-filter.php' );
+    require get_parent_theme_file_path( '/extension/widgets/vendor-filter.php' );
+
     /*
      * Required: Woocommerce
      */
