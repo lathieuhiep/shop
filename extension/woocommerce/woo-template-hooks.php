@@ -50,12 +50,7 @@ add_action( 'woocommerce_after_main_content', 'shoptheme_woo_after_main_content'
 
 add_action( 'woocommerce_after_shop_loop', 'shoptheme_woo_pagination_ajax', 10 );
 
-/**
- * Product Category
- *
- * @see shoptheme_woo_get_product_cat_filter()
- */
-add_action( 'shoptheme_woo_product_cat_filter', 'shoptheme_woo_get_product_cat_filter', 10 );
+add_action( 'shoptheme_pagination_product', 'shoptheme_woo_pagination_ajax', 10, 1 );
 
 /**
  * Single Product

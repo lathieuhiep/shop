@@ -19,7 +19,7 @@ function shoptheme_shoptheme_setup() {
 add_filter('loop_shop_per_page', 'shoptheme_show_products_per_page');
 
 function shoptheme_show_products_per_page() {
-    global $shoptheme_options, $shoptheme_product_limit;
+    global $shoptheme_options;
 
     $shoptheme_product_limit = $shoptheme_options['shoptheme_product_limit'];
 
@@ -69,19 +69,26 @@ if ( ! function_exists( 'shoptheme_woo_before_main_content' ) ) :
      * Wraps all WooCommerce content in wrappers which match the theme markup
      */
     function shoptheme_woo_before_main_content() {
-
+        global $shoptheme_options;
+        $shoptheme_sidebar_woo_position = $shoptheme_options['shoptheme_sidebar_woo'];
     ?>
 
         <div class="site-shop">
             <div class="container">
                 <div class="row">
-<!--                    --><?php
-//                        if ( is_product_category() ) :
-//                            do_action( 'shoptheme_woo_product_cat_filter' );
-//                        endif;
-//                    ?>
+                    <?php
+                    /**
+                     * woocommerce_sidebar hook.
+                     *
+                     * @hooked shoptheme_woo_sidebar - 10
+                     */
 
-                    <div class="<?php echo is_active_sidebar( 'shoptheme-sidebar-wc' ) ? 'col-md-9' : 'col-md-12'; ?>">
+                    if ( $shoptheme_sidebar_woo_position == 'left' ) :
+                        do_action( 'shoptheme_woo_sidebar' );
+                    endif;
+                    ?>
+
+                    <div class="<?php echo is_active_sidebar( 'shoptheme-sidebar-wc' ) && $shoptheme_sidebar_woo_position != 'hide' ? 'col-md-9' : 'col-md-12'; ?>">
                         <div class="site-shop__box">
 
     <?php
@@ -96,7 +103,8 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
      * Closes the wrapping divs
      */
     function shoptheme_woo_after_main_content() {
-
+        global $shoptheme_options;
+        $shoptheme_sidebar_woo_position = $shoptheme_options['shoptheme_sidebar_woo'];
     ?>
                         </div>
                     </div><!-- .col-md-9 or col-md-12 -->
@@ -108,8 +116,9 @@ if ( ! function_exists( 'shoptheme_woo_after_main_content' ) ) :
                      * @hooked shoptheme_woo_sidebar - 10
                      */
 
-                    do_action( 'shoptheme_woo_sidebar' );
-
+                    if ( $shoptheme_sidebar_woo_position == 'right' ) :
+                        do_action( 'shoptheme_woo_sidebar' );
+                    endif;
                     ?>
 
                 </div><!-- .row -->
@@ -227,12 +236,20 @@ if ( ! function_exists( 'shoptheme_woo_pagination_ajax' ) ) :
      * @hooked shoptheme_woo_pagination_ajax - 10
      */
 
-    function shoptheme_woo_pagination_ajax() {
-        global $shoptheme_product_limit;
+    function shoptheme_woo_pagination_ajax( $shoptheme_ajax_query ) {
 
-        $shoptheme_data_cat_product =   '';
-        $shoptheme_woo_total_pages  =   wc_get_loop_prop( 'total_pages' );
-        $shoptheme_woo_orderby      =   $_GET['orderby'];
+        $shoptheme_product_limit        =   shoptheme_show_products_per_page();
+        $shoptheme_data_cat_product     =   '';
+        $shoptheme_woo_total_pages      =   wc_get_loop_prop( 'total_pages' );
+        $shoptheme_woo_total_product    =   wc_get_loop_prop( 'total' );
+        $shoptheme_woo_orderby          =   $_GET['orderby'];
+
+        if ( !empty( $shoptheme_ajax_query ) ) :
+
+            $shoptheme_woo_total_pages      =   $shoptheme_ajax_query->max_num_pages;
+            $shoptheme_woo_total_product    =   $shoptheme_ajax_query->found_posts;
+
+        endif;
 
         if ( is_product_category() ) :
             $shoptheme_data_cat_product =   ' data-cat-id='. get_queried_object_id() .'';
@@ -240,7 +257,6 @@ if ( ! function_exists( 'shoptheme_woo_pagination_ajax' ) ) :
 
         if ( $shoptheme_woo_total_pages > 1 ) :
 
-            $shoptheme_woo_total_product            =   wc_get_loop_prop( 'total' );
             $shoptheme_woo_total_product_remaining  =   $shoptheme_woo_total_product - $shoptheme_product_limit;
 ?>
 
