@@ -53,7 +53,7 @@
                 if ( data ){
 
                     site_shop_product.empty().append(data).find( 'li.product' ).addClass( 'popIn' );
-                    // site_shop_product.find( 'ul.products' ).removeClass( 'product-opacity' );
+
                 }
 
                 setTimeout( function() {
@@ -72,9 +72,13 @@
     $( 'body' ).on( 'click', '.btn-load-product', function () {
 
         let site_shop_pagination    =   $( '.site-shop__pagination' ),
+            product_vendor_ids      =   $(this).parents( '.site-shop' ).data( 'product-vendor' ),
+            product_collection_ids  =   $(this).parents( '.site-shop' ).data( 'product-collection' ),
             pagination_product      =   parseInt( $(this).data( 'pagination' ) ),
             limit_product           =   parseInt( $(this).data( 'limit-product' ) ),
-            remaining_product       =   parseInt( $(this).data( 'remaining-product' ) );
+            remaining_product       =   parseInt( $(this).data( 'remaining-product' ) ),
+            vendor_ids              =   $(this).data( 'product-vendor' ),
+            collection_ids              =   $(this).data( 'product-collection' );
 
         $.ajax({
 
@@ -86,7 +90,9 @@
                 shoptheme_page_shop: pagination_product,
                 shoptheme_orderby_product: orderby,
                 shoptheme_limit_product: limit_product,
-                shoptheme_product_cat_id: product_cat_id
+                shoptheme_product_cat_id: product_cat_id,
+                shoptheme_vendor_ids: vendor_ids,
+                shoptheme_collection_ids: collection_ids
 
             }),
 

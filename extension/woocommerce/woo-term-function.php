@@ -362,7 +362,7 @@ function shoptheme_filter_product_cat() {
 
         woocommerce_product_loop_end();
 
-        do_action( 'shoptheme_pagination_product', $shoptheme_filter_product_query );
+        do_action( 'shoptheme_pagination_product', $shoptheme_filter_product_query, $shoptheme_vendor_ids, $shoptheme_collection_ids );
         
     else:
         do_action( 'woocommerce_no_products_found' );
