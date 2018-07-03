@@ -98,7 +98,7 @@ class shoptheme_collection_filter_widget extends WP_Widget {
     <?php
 
         echo $args['after_widget'];
-        
+
         endif;
     }
     /**

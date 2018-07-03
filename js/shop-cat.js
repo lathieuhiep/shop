@@ -78,7 +78,7 @@
             limit_product           =   parseInt( $(this).data( 'limit-product' ) ),
             remaining_product       =   parseInt( $(this).data( 'remaining-product' ) ),
             vendor_ids              =   $(this).data( 'product-vendor' ),
-            collection_ids              =   $(this).data( 'product-collection' );
+            collection_ids          =   $(this).data( 'product-collection' );
 
         $.ajax({
 
