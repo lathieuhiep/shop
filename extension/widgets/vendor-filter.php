@@ -27,6 +27,8 @@ class shoptheme_vendor_filter_widget extends WP_Widget {
      */
     public function widget( $args, $instance ) {
 
+        if ( is_product_category() || is_shop() ) :
+
         echo $args['before_widget'];
 
         if ( ! empty( $instance['title'] ) ) :
@@ -94,7 +96,10 @@ class shoptheme_vendor_filter_widget extends WP_Widget {
         </div>
 
         <?php
+
         echo $args['after_widget'];
+
+        endif;
     }
     /**
      * Outputs the options form on admin
