@@ -137,4 +137,16 @@
 
     } );
 
+    $( '.load-more-filter-product' ).on( 'click', function () {
+
+        let widget_filter = $(this).parents('.widget').find( '.widget-filter-product-term__item' );
+
+        widget_filter.slice(0, 7).slideDown();
+
+        if ( widget_filter.length === 0 ) {
+            $(this).fadeOut('slow');
+        }
+
+    } )
+
 } )( jQuery );
