@@ -95,6 +95,14 @@ class shoptheme_vendor_filter_widget extends WP_Widget {
 
         </div>
 
+        <?php if ( count( $shoptheme_get_product_meta_vendor_ids ) > 7 ) : ?>
+
+            <span class="load-more-filter-product">
+                <?php esc_html_e( 'Load More', 'shoptheme' ); ?>
+            </span>
+
+        <?php endif; ?>
+
         <?php
 
         echo $args['after_widget'];
