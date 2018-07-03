@@ -1673,6 +1673,14 @@ section.widget.widget_search form .search-submit {
   animation: spin 2s linear infinite;
 }
 
+.sidebar-filter-shop .widget-filter-product-term__item:nth-child(n+7) {
+  display: none;
+}
+
+.load-more-filter-product {
+  cursor: pointer;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% {
