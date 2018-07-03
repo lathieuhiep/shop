@@ -545,6 +545,6 @@ function shoptheme_pagination_product() {
 
 <?php
     endwhile;
-    exit();
+    wp_die();
 
 }
