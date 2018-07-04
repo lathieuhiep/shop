@@ -12,7 +12,7 @@ $shoptheme_copyright    =   $shoptheme_options ["shoptheme_footer_copyright_edit
 
             <div class="site-copyright">
                 <p class="site-copyright_text">
-                    <?php echo balanceTags( $shoptheme_copyright, true ); ?>
+                    <?php echo wp_kses_post( $shoptheme_copyright ); ?>
                 </p>
             </div>
 
