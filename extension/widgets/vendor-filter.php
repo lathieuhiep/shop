@@ -85,7 +85,9 @@ class shoptheme_vendor_filter_widget extends WP_Widget {
                     <label>
                         <input class="product_vendor_check" type="checkbox" name="<?php echo esc_attr( $shoptheme_term_vendor->slug ); ?>" value="<?php echo esc_attr( $shoptheme_term_vendor->term_id ); ?>" data-filter="product_vendor" />
 
-                        <span>
+                        <span class="widget-filter-product-term__check"></span>
+
+                        <span class="widget-filter-product-term__name">
                             <?php echo esc_html( $shoptheme_term_vendor->name ); ?>
                         </span>
                     </label>
@@ -99,6 +101,7 @@ class shoptheme_vendor_filter_widget extends WP_Widget {
 
             <span class="load-more-filter-product">
                 <?php esc_html_e( 'Load More', 'shoptheme' ); ?>
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
             </span>
 
         <?php endif; ?>

@@ -85,6 +85,8 @@ class shoptheme_collection_filter_widget extends WP_Widget {
                     <label>
                         <input class="product_collection_check" type="checkbox" name="<?php echo esc_attr( $shoptheme_term_collection->slug ); ?>" value="<?php echo esc_attr( $shoptheme_term_collection->term_id ); ?>" data-filter="product_collections" />
 
+                        <span class="widget-filter-product-term__check"></span>
+
                         <span>
                             <?php echo esc_html( $shoptheme_term_collection->name ); ?>
                         </span>
@@ -99,6 +101,7 @@ class shoptheme_collection_filter_widget extends WP_Widget {
 
             <span class="load-more-filter-product">
                 <?php esc_html_e( 'Load More', 'shoptheme' ); ?>
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
             </span>
 
         <?php endif; ?>
