@@ -285,13 +285,53 @@
 }
 .sidebar-filter-shop {
   .widget-filter-product-term__item {
+    margin-top: 3px;
+
+    &:first-child {
+      margin-top: 0;
+    }
     &:nth-child(n+7) {
       display: none;
     }
+    label {
+      margin: 0;
+      display: block;
+
+      span {
+        display: inline-block;
+      }
+      .widget-filter-product-term__check {
+        width: 15px;
+
+        &::before {
+          font-family:'FontAwesome';
+          content:"\f096";
+        }
+      }
+      input[type=checkbox] {
+        display: none;
+
+        &:checked {
+          + .widget-filter-product-term__check {
+            &::before {
+              content:"\f046";
+            }
+          }
+        }
+      }
+    }
   }
 }
+
 .load-more-filter-product {
+  display: block;
   cursor: pointer;
+  margin-top: 3px;
+  @include transition(all 0.4s ease-in-out);
+
+  &:hover {
+    color: #ff5555;
+  }
 }
 
 /* Safari */
