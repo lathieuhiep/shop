@@ -206,7 +206,6 @@ function shoptheme_register_front_end() {
 
     /* Start Carousel Css */
     wp_enqueue_style( 'owl-carousel', get_theme_file_uri( '/css/owl.carousel.min.css' ), array(), '2.3.4' );
-//    wp_enqueue_style( 'owl-theme-default', get_theme_file_uri( '/css/owl.theme.default.min.css' ), array(), '2.3.4' );
     /* End Carousel Css */
 
     /*  Start Style Css   */
